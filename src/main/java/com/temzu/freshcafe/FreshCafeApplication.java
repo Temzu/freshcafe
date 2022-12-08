@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FreshcafeApplication {
+public class FreshCafeApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(FreshcafeApplication.class, args);
+    SpringApplication.run(FreshCafeApplication.class, args);
   }
 
 }
