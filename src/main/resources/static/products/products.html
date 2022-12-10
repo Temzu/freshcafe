@@ -1,20 +1,7 @@
-<h3>Filter</h3>
-<form class="d-flex" novalidate ng-submit="showProductsPage()">
-  <div class="input-group">
-    <span class="input-group-text">Product title</span>
-    <input class="form-control" type="text" ng-model="filter.title" id="filterTitle">
+<div class="title">
+  <h3 class="text-center">Меню</h3>
+</div>
 
-    <span class="input-group-text">Min price</span>
-    <input class="form-control" type="number" ng-model="filter.min_price" id="filterMinPrice">
-
-    <span class="input-group-text">Max price</span>
-    <input class="form-control" type="number" ng-model="filter.max_price" id="filterMaxPrice">
-
-    <button class="btn btn-primary" type="submit">Apply</button>
-  </div>
-</form>
-
-<h3>List of goods</h3>
 <table class="table table-hover">
   <thead>
   <tr>
