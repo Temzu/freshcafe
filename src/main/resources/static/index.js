@@ -40,7 +40,7 @@
       redirectTo: '/'
     });
   }
-  const contextPath = "http://localhost:8189/freshcafe";
+  const contextPath = "http://localhost/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
     $("#reg").click(function(){
@@ -65,7 +65,7 @@ angular.module('market-front').controller('indexController',
     function ($rootScope, $scope, $http, $localStorage, $location) {
       console.log("sdfsdf")
 
-      const contextPath = "http://localhost:8189/freshcafe";
+      const contextPath = "http://localhost/freshcafe";
 
       let myModal = document.getElementById('ModalForm');
 
