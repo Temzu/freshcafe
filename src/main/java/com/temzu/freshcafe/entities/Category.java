@@ -28,6 +28,9 @@ public class Category {
   @Column(name = "title")
   private String title;
 
+  @Column(name = "image_name")
+  private String imageName;
+
   @OneToMany(mappedBy = "category")
   private List<Product> products;
 

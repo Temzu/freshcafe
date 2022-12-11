@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html ng-app="market-front" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Market</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+  <link href="style/modalform.css" rel="stylesheet" type="text/css">
+  <link href="style/menu.css" rel="stylesheet" type="text/css">
+  <link href="style/category_item.css" rel="stylesheet" type="text/css">
+
+
+  <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+</head>
+<body>
+
+<header ng-controller="indexController" class="sticky-top">
+
+  <div class="container">
+    <nav class="navbar navbar-expand-md navbar-light">
+      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#!/categories">Меню</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">О нас</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" ng-if="isUserLoggedIn()">Мои заказы</a>
+          </li>
+        </ul>
+      </div>
+      <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">
+          <img src="images/logo/Freshcafe-logos_transparent1.png" alt="" height="70">
+        </a>
+      </div>
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">8 (965) 278-90-89</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!/cart">Корзина</a>
+          </li>
+          <li class="nav-item" ng-if="!isUserLoggedIn()">
+            <button type="button" class="btn text-light" data-bs-toggle="modal" data-bs-target="#ModalForm" style="background: #4B8D97">
+              Авторизоваться
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+<div ng-controller="indexController" class="modal fade" id="ModalForm" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="myform bg-dark">
+          <h1 class="text-center">Авторизация</h1>
+          <form>
+            <div class="mb-3 mt-4">
+              <label for="exampleInputEmail1" class="form-label">Email</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Пароль</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-light mt-3" >Авторизоваться</button>
+            <button id="reg" type="button" class="btn btn-light mt-3" ng-click="toRegistration()">Регистрация</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <ng-view></ng-view>
+</div>
+
+
+<footer ng-controller="indexController" class="footer">
+  <div class="container">
+    <div class="row row-cols-3">
+      <div class="col">
+
+      </div>
+
+      <div class="col">
+        <img class="rounded mx-auto d-block footer_logo" src="images/logo/Freshcafe-logos_white1.png" alt="">
+      </div>
+
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="index.js"></script>
+<script src="home/home.js"></script>
+<script src="menu/products.js"></script>
+<script src="registration/registration.js"></script>
+<script src="order/order.js"></script>
+<script src="cart/cart.js"></script>
+<script src="categories/categories.js"></script>
+
+</body>
+</html>

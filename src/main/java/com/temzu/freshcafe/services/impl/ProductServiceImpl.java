@@ -5,7 +5,6 @@ import com.temzu.freshcafe.dao.ProductDao;
 import com.temzu.freshcafe.dtos.ProductCreateDto;
 import com.temzu.freshcafe.dtos.ProductDto;
 import com.temzu.freshcafe.dtos.ProductUpdateDto;
-import com.temzu.freshcafe.entities.Product;
 import com.temzu.freshcafe.mappers.ProductMapper;
 import com.temzu.freshcafe.services.ProductService;
 import lombok.RequiredArgsConstructor;
