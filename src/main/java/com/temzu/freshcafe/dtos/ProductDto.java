@@ -10,6 +10,8 @@ public class ProductDto {
 
   private String title;
 
+  private String imageName;
+
   private BigDecimal price;
 
   private String categoryTitle;

@@ -13,8 +13,16 @@
       controller: 'homeController'
     })
     .when('/products', {
-      templateUrl: 'products/products.html',
+      templateUrl: 'menu/categories.html',
       controller: 'productsController'
+    })
+    .when('/categories', {
+      templateUrl: 'categories/categories.html',
+      controller: 'categoriesController'
+    })
+    .when('/categories/:categoryTitle', {
+      templateUrl: 'categories/categories_item.html',
+      controller: 'categoriesController'
     })
     .when('/registration', {
       templateUrl: 'registration/registration.html',
@@ -35,6 +43,10 @@
   const contextPath = "http://localhost:8189/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
+    $("#reg").click(function(){
+      $("#ModalForm").modal("hide");
+    });
+
     if ($localStorage.currentUser) {
       $http.defaults.headers.common.Authorization = $localStorage.currentUser.token;
     }
@@ -51,8 +63,11 @@
 
 angular.module('market-front').controller('indexController',
     function ($rootScope, $scope, $http, $localStorage, $location) {
+      console.log("sdfsdf")
 
       const contextPath = "http://localhost:8189/freshcafe";
+
+      let myModal = document.getElementById('ModalForm');
 
       $scope.tryToAuth = function () {
 
@@ -101,6 +116,11 @@ angular.module('market-front').controller('indexController',
           $scope.user.password = null;
         }
 
+      };
+
+      $scope.toRegistration = function () {
+        console.log("sdfsdfw")
+        $location.path('/registration');
       };
 
       $scope.clearUser = function () {

@@ -35,6 +35,9 @@ public class Product {
   @Column(name = "description")
   private String description;
 
+  @Column(name = "image_name")
+  private String imageName;
+
   @Column(name = "createdAt")
   @CreationTimestamp
   private LocalDateTime createdAt;

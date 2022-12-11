@@ -5,6 +5,8 @@ import com.temzu.freshcafe.entities.Category;
 import com.temzu.freshcafe.exceptions.ResourceNotFoundException;
 import com.temzu.freshcafe.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +14,11 @@ import org.springframework.stereotype.Service;
 public class CategoryDaoImpl implements CategoryDao {
 
   private final CategoryRepository categoryRepository;
+
+  @Override
+  public Page<Category> findPage(int page, int pageSize) {
+    return categoryRepository.findAll(PageRequest.of(page - 1, pageSize));
+  }
 
   @Override
   public Category findById(Long id) {
