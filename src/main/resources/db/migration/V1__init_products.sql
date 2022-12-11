@@ -2,19 +2,25 @@ create table categories
 (
     id         bigserial primary key,
     title      varchar(255) not null,
+    image_name varchar(255),
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp
 );
 
-insert into categories (title)
-values ('Завтраки'),
-       ('Супы'),
-       ('Горячие блюда'),
-       ('Салаты'),
-       ('Роллы'),
-       ('Гарниры '),
-       ('Десерты'),
-       ('Напитки');
+insert into categories (title, image_name)
+values ('Завтраки', 'recepty-dlya-zavtraka-2.jpg'),
+       ('Супы', '64112040.jpg'),
+       ('Горячие блюда', 'dishes-for-the-new-year-e1545903177674.jpg'),
+       ('Салаты', 'salad-for-ny2-e1545389471379.jpg'),
+       ('Роллы', 'glavnaya-7.jpg'),
+       ('Гарниры', 'garnir.jpg'),
+       ('Десерты', '1541338458_zamorozhennye-deserty-bolee-60-receptov.jpg'),
+       ('Кофе', '6579-ed4_wide.jpg'),
+       ('Чай', '7c664063ba5e6215cb3567de3330c187.jpg'),
+       ('Вода', 'mineralnaya-ili-pitievaya-voda.jpg'),
+       ('Лимонады', 'shutterstock-285268421.jpg'),
+       ('Смузи', 'fruktovyi-smuzi-v-blendere_1629916238_11_max.jpg'),
+       ('Свежевыжатые соки', 'svezhevyzhatyy-sok2.jpg');
 
 create table products
 (

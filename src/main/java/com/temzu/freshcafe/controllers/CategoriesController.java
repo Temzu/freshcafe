@@ -4,6 +4,8 @@ import com.temzu.freshcafe.dtos.CategoryDto;
 import com.temzu.freshcafe.dtos.ProductDto;
 import com.temzu.freshcafe.services.CategoryService;
 import com.temzu.freshcafe.services.ProductService;
+import java.util.List;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +26,17 @@ public class CategoriesController {
   @GetMapping
   public Page<CategoryDto> findPage(
       @RequestParam(name = "page", defaultValue = "1") Integer page,
-      @RequestParam(name = "page_size", defaultValue = "10") Integer pageSize) {
+      @RequestParam(name = "page_size", defaultValue = "20") Integer pageSize) {
     if (page < 1 || pageSize < 1) {
       page = 1;
-      pageSize = 10;
+      pageSize = 20;
     }
     return categoryService.findPage(page, pageSize);
+  }
+
+  @GetMapping("/set")
+  public List<CategoryDto> findAll() {
+    return categoryService.findAll();
   }
 
   @GetMapping("/{category_title}")

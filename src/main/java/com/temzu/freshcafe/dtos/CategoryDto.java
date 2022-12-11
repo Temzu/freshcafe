@@ -9,4 +9,6 @@ public class CategoryDto {
 
   private String title;
 
+  private String imageName;
+
 }

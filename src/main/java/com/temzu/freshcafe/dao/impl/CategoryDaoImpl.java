@@ -4,6 +4,7 @@ import com.temzu.freshcafe.dao.CategoryDao;
 import com.temzu.freshcafe.entities.Category;
 import com.temzu.freshcafe.exceptions.ResourceNotFoundException;
 import com.temzu.freshcafe.repositories.CategoryRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,5 +33,10 @@ public class CategoryDaoImpl implements CategoryDao {
     return categoryRepository
         .findByTitle(title)
         .orElseThrow(() -> ResourceNotFoundException.byTitle(title, Category.class));
+  }
+
+  @Override
+  public List<Category> findAll() {
+    return categoryRepository.findAll();
   }
 }

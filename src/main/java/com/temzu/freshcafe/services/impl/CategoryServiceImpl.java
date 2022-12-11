@@ -4,6 +4,8 @@ import com.temzu.freshcafe.dao.CategoryDao;
 import com.temzu.freshcafe.dtos.CategoryDto;
 import com.temzu.freshcafe.mappers.CategoryMapper;
 import com.temzu.freshcafe.services.CategoryService;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -19,5 +21,12 @@ public class CategoryServiceImpl implements CategoryService {
   @Override
   public Page<CategoryDto> findPage(int page, int pageSize) {
     return categoryDao.findPage(page, pageSize).map(categoryMapper::toCategoryDto);
+  }
+
+  @Override
+  public List<CategoryDto> findAll() {
+    return categoryDao.findAll().stream()
+        .map(categoryMapper::toCategoryDto)
+        .collect(Collectors.toList());
   }
 }
