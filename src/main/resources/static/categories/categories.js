@@ -1,6 +1,6 @@
 angular.module('market-front').controller("categoriesController",
     function ($scope, $http, $localStorage, $routeParams, $rootScope) {
-      const contextPath = "https://freshcafe-production-3add.up.railway.app/freshcafe";
+      const contextPath = "https://localhost:8189/freshcafe";
 
       // $scope.categoryTitle = $routeParams.categoryTitle;
 

@@ -40,7 +40,7 @@
       redirectTo: '/'
     });
   }
-  const contextPath = "https://freshcafe-production-3add.up.railway.app/freshcafe";
+  const contextPath = "https://localhost:8189/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
     $("#reg").click(function(){
@@ -65,7 +65,7 @@ angular.module('market-front').controller('indexController',
     function ($rootScope, $scope, $http, $localStorage, $location) {
       console.log("sdfsdf")
 
-      const contextPath = "https://freshcafe-production-3add.up.railway.app//freshcafe";
+      const contextPath = "https://localhost:8189/freshcafe";
 
       let myModal = document.getElementById('ModalForm');
 
