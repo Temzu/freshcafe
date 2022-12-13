@@ -23,3 +23,9 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
+
+
+
+utils:
+  cart:
+    prefix: MONO_MARKET_CART_

@@ -40,7 +40,7 @@
       redirectTo: '/'
     });
   }
-  const contextPath = "https://localhost:8189/freshcafe";
+  const contextPath = "http://localhost:8189/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
     $("#reg").click(function(){
@@ -65,7 +65,7 @@ angular.module('market-front').controller('indexController',
     function ($rootScope, $scope, $http, $localStorage, $location) {
       console.log("sdfsdf")
 
-      const contextPath = "https://localhost:8189/freshcafe";
+      const contextPath = "http://localhost:8189/freshcafe";
 
       let myModal = document.getElementById('ModalForm');
 
@@ -76,14 +76,17 @@ angular.module('market-front').controller('indexController',
           if (response.data.token) {
             $http.defaults.headers.common.Authorization = response.data.token;
             $localStorage.currentUser = {
-              login: $scope.user.login,
+              email: $scope.user.email,
               token: response.data.token
             };
 
-            $scope.currentUserName = $scope.user.login;
+            $scope.currentUserName = $scope.user.email;
 
-            $scope.user.login = null;
+            $scope.user.email = null;
             $scope.user.password = null;
+
+            $("#ModalForm").modal("hide");
+            $location.path('/categories');
 
             $http.get(
                 contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid + '/merge')
@@ -107,10 +110,10 @@ angular.module('market-front').controller('indexController',
         .then(function successCallback(response) {
           $localStorage.guestCartUuid = response.data;
         });
+        $http.defaults.headers.common.Authorization = null;
 
-        $location.path('/');
-        if ($scope.user.login) {
-          $scope.user.login = null;
+        if ($scope.user.email) {
+          $scope.user.email = null;
         }
         if ($scope.user.password) {
           $scope.user.password = null;
@@ -119,7 +122,6 @@ angular.module('market-front').controller('indexController',
       };
 
       $scope.toRegistration = function () {
-        console.log("sdfsdfw")
         $location.path('/registration');
       };
 

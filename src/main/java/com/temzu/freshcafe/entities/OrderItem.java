@@ -15,38 +15,38 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Data
 @NoArgsConstructor
+@Data
 @Entity
-@Table(name = "products")
-public class Product {
-
+@Table(name = "order_items")
+public class OrderItem {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
 
-  @Column(name = "title")
-  private String title;
+  @ManyToOne
+  @JoinColumn(name = "order_id")
+  private Order order;
 
   @ManyToOne
-  @JoinColumn(name = "category_id")
-  private Category category;
+  @JoinColumn(name = "product_id")
+  private Product product;
+
+  @Column(name = "price_per_product")
+  private BigDecimal pricePerProduct;
 
   @Column(name = "price")
   private BigDecimal price;
 
-  @Column(name = "description")
-  private String description;
+  @Column(name = "quantity")
+  private int quantity;
 
-  @Column(name = "image_name")
-  private String imageName;
-
-  @Column(name = "createdAt")
   @CreationTimestamp
+  @Column(name = "created_at")
   private LocalDateTime createdAt;
 
-  @Column(name = "updatedAt")
   @UpdateTimestamp
+  @Column(name = "updated_at")
   private LocalDateTime updatedAt;
 }

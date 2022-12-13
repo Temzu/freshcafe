@@ -29,4 +29,8 @@ public class ResourceNotFoundException extends ResourceException {
   public static ResourceNotFoundException byUuid(String uuid, Class<?> entityClass) {
     return new ResourceNotFoundException(entityClass, ExceptionTypes.UUID, uuid);
   }
+
+  public static ResourceNotFoundException byEmail(String uuid, Class<?> entityClass) {
+    return new ResourceNotFoundException(entityClass, ExceptionTypes.EMAIL, uuid);
+  }
 }
