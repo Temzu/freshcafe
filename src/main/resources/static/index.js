@@ -57,13 +57,19 @@
         $localStorage.guestCartUuid = response.data.value;
         console.log($localStorage.guestCartUuid);
       });
+    } else {
+      $http({
+        url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
+        method: 'GET'
+      }).then(function (response) {
+        $rootScope.cart = response.data;
+      });
     }
   }
 })();
 
 angular.module('market-front').controller('indexController',
     function ($rootScope, $scope, $http, $localStorage, $location) {
-      console.log("sdfsdf")
 
       const contextPath = "http://localhost:8189/freshcafe";
 
@@ -145,4 +151,12 @@ angular.module('market-front').controller('indexController',
           return false;
         }
       };
+
+      $scope.isCartEmpty = function () {
+        if ($rootScope.cart == null || $rootScope.cart.items.length === 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     });

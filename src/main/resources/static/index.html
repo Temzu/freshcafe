@@ -49,16 +49,19 @@
             <a class="nav-link fs-5" href="#">8 (965) 278-90-89</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fs-5" href="#!/cart">Корзина</a>
+            <a class="fs-5 btn btn-outline-danger" href="#!/cart" ng-show="cart == null || cart.items.length == 0">Корзина</a>
           </li>
-          <li class="nav-item" ng-if="!isUserLoggedIn()">
+          <li class="nav-item" ng-if="!isCartEmpty()">
+            <a class="fs-5 btn btn-outline-danger" href="#!/cart">{{cart.price}}₽</a>
+          </li>
+          <li class="nav-item" ng-if="!isUserLoggedIn()" style="margin-left: 5px">
             <button type="button" class="btn text-light fs-5" data-bs-toggle="modal" data-bs-target="#ModalForm" style="background: #4B8D97">
               Войти
             </button>
           </li>
 
           <li class="nav-item" ng-if="isUserLoggedIn()">
-            <button type="button" class="btn btn-outline-secondary text-light fs-5" ng-click="tryToLogout()" data-bs-toggle="modal" data-bs-target="#ModalForm" style="background: #4B8D97">
+            <button type="button" class="btn btn-outline-secondary text-light fs-5" ng-click="tryToLogout()" data-bs-toggle="modal" data-bs-target="#ModalForm" style="background: #4B8D97; margin-left: 5px">
               Выйти
             </button>
           </li>

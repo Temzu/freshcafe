@@ -1,5 +1,5 @@
 angular.module('market-front').controller('cartController',
-    function ($scope, $http, $localStorage) {
+    function ($scope, $http, $localStorage, $rootScope) {
       const contextPath = 'http://localhost:8189/freshcafe';
 
       $scope.loadCart = function () {
@@ -7,7 +7,7 @@ angular.module('market-front').controller('cartController',
           url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
           method: 'GET'
         }).then(function (response) {
-          $scope.cart = response.data;
+          $rootScope.cart = response.data;
         });
       }
 
@@ -49,7 +49,7 @@ angular.module('market-front').controller('cartController',
               + '/clear',
           method: 'GET'
         }).then(function (response) {
-          $scope.cart = null;
+          $rootScope.cart = null;
         });
       }
 

@@ -10,6 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderCreateDto {
 
+  @NotBlank(message = "Name must not be blank and not be null")
+  @Size(min = 3, max = 255, message = "Title length must be between 3-30")
+  @Pattern(regexp="^[A-Za-z\\d]*$", message = "Title contains invalid characters")
+  private String clientName;
+
   @NotBlank(message = "Address must not be blank and not be null")
   private String address;
 

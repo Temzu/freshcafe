@@ -69,6 +69,26 @@ angular.module('market-front').controller("categoriesController",
         });
       };
 
+      $scope.addToCart = function (productId) {
+        $http({
+          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+              + '/add/' + productId,
+          method: 'GET'
+        }).then(function successCallback(response) {
+          $scope.loadCart();
+          $("#ModalCategoriesForm" + productId).modal("hide");
+        });
+      }
+
+      $scope.loadCart = function () {
+        $http({
+          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
+          method: 'GET'
+        }).then(function (response) {
+          $rootScope.cart = response.data;
+        });
+      }
+
       $scope.generatePagesIndexes = function (startPage, endPage) {
         let arr = [];
         for (let i = startPage; i < endPage + 1; i++) {

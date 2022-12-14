@@ -28,4 +28,4 @@ spring:
 
 utils:
   cart:
-    prefix: MONO_MARKET_CART_
+    prefix: FRESHCAFE_CART_

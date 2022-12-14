@@ -29,9 +29,9 @@ public class CartController {
     return new StringResponse(cartService.generateCartUuid());
   }
 
-  @GetMapping("/{uuid}/add/{productId}")
-  public void add(Principal principal, @PathVariable String uuid, @PathVariable Long productId) {
-    cartService.addToCart(getCurrentCartUuid(principal, uuid), productId);
+  @GetMapping("/{cartUuid}/add/{productId}")
+  public void add(Principal principal, @PathVariable String cartUuid, @PathVariable Long productId) {
+    cartService.addToCart(getCurrentCartUuid(principal, cartUuid), productId);
   }
 
   @GetMapping("/{uuid}/decrement/{productId}")
