@@ -10,6 +10,7 @@ angular.module('market-front').controller('ordersController', function ($scope, 
       }
     }).then(function (response) {
       $scope.orderPage = response.data;
+      console.log($scope.orderPage.content)
       $scope.navList = $scope.generatePagesIndexes(1, $scope.orderPage.totalPages);
     });
   };

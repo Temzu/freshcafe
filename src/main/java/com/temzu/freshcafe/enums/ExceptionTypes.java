@@ -2,6 +2,8 @@ package com.temzu.freshcafe.enums;
 
 public enum ExceptionTypes {
   ID("ID"),
+
+  CODE("CODE"),
   LOGIN("LOGIN"),
   NAME("NAME"),
   TITLE("TITLE"),

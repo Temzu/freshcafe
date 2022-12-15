@@ -7,6 +7,7 @@ import com.temzu.freshcafe.dtos.OrderDto;
 import com.temzu.freshcafe.entities.Order;
 import com.temzu.freshcafe.entities.OrderItem;
 import com.temzu.freshcafe.entities.User;
+import com.temzu.freshcafe.enums.OrderStatuses;
 import com.temzu.freshcafe.mappers.OrderItemMapper;
 import com.temzu.freshcafe.mappers.OrderMapper;
 import com.temzu.freshcafe.services.CartService;
@@ -52,6 +53,9 @@ public class OrderServiceImpl implements OrderService {
         Order.builder()
             .phone(orderCreateDto.getPhone())
             .address(orderCreateDto.getAddress())
+            .clientName(orderCreateDto.getClientName())
+            .orderTypeValue(orderCreateDto.getOrderTypeValue())
+            .orderStatusValue(OrderStatuses.ORDER_PROCESSING.getCode())
             .user(userDao.findByLogin(login))
             .price(cart.getPrice())
             .build();

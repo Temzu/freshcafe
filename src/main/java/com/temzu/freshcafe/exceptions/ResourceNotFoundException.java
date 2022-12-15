@@ -14,6 +14,10 @@ public class ResourceNotFoundException extends ResourceException {
     return new ResourceNotFoundException(entityClass, ExceptionTypes.ID, id.toString());
   }
 
+  public static ResourceNotFoundException byCode(Integer code, Class<?> entityClass) {
+    return new ResourceNotFoundException(entityClass, ExceptionTypes.CODE, code.toString());
+  }
+
   public static ResourceNotFoundException byName(String name, Class<?> entityClass) {
     return new ResourceNotFoundException(entityClass, ExceptionTypes.NAME, name);
   }

@@ -50,9 +50,10 @@ angular.module('market-front').controller("categoriesController",
             page: pageIndex
           }
         }).then(function (response) {
-          console.log(categoryTitle + " " + "huy")
           $rootScope.productsPage = response.data;
           $rootScope.categoryTitle = categoryTitle;
+
+          console.log($rootScope.productsPage.content)
 
           let minPageIndex = pageIndex - 2;
           if (minPageIndex < 1) {

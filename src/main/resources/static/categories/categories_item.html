@@ -4,15 +4,30 @@
 
 <div class="container">
   <div class="row row-cols-4 justify-content-start">
-    <div class="production-list-item col" ng-repeat="p in productsPage.content">
-      <a type="button" data-bs-toggle="modal" data-bs-target="#ModalCategoriesForm{{p.id}}">
-      <span class="production-item-img">
-        <img src="./images/products/{{p.imageName}}">
-      </span>
-        <span class="production-item-title">
-        {{p.title}}
-      </span>
-      </a>
+    <div class="production-list-item col-3" ng-repeat="p in productsPage.content">
+      <div class="product-item-img">
+          <a type="button" data-bs-toggle="modal" data-bs-target="#ModalCategoriesForm{{p.id}}">
+        <span class="production-item-img">
+          <img src="./images/products/{{p.imageName}}">
+        </span>
+            <span class="production-item-title">
+          {{p.title}}
+        </span>
+          </a>
+      </div>
+
+      <div class="container catalog-item-info">
+        <div class="row catalog-item-bottom">
+          <div class="col-6 catalog-item-price">
+              {{p.price}}₽
+          </div>
+
+          <div class="col-6 catalog-item-price">
+            {{p.price}}₽
+          </div>
+        </div>
+      </div>
+
 
       <div class="modal fade" id="ModalCategoriesForm{{p.id}}" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -21,7 +36,7 @@
               <button id="addToCart" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
               <div class="myform bg-dark">
                 <h1 class="text-center">{{p.title}}</h1>
-                <h2 class="text-left">Описание: {{p.price}}</h2>
+                <h2 class="text-left">Описание: {{p.price}}₽</h2>
                 <h2 class="text-left">Цена: {{p.price}}₽</h2>
                 <button type="button" class="btn btn-light mt-3" ng-click="addToCart(p.id)">В корзину</button>
               </div>

@@ -4,8 +4,12 @@ import com.temzu.freshcafe.dtos.CategoryDto;
 import com.temzu.freshcafe.dtos.ProductCreateDto;
 import com.temzu.freshcafe.dtos.ProductDto;
 import com.temzu.freshcafe.dtos.ProductUpdateDto;
+import com.temzu.freshcafe.mappers.ProductMapper;
+import com.temzu.freshcafe.repositories.ProductRepository;
 import com.temzu.freshcafe.services.CategoryService;
 import com.temzu.freshcafe.services.ProductService;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,6 +29,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
   private final ProductService productService;
+
+  private final ProductRepository productRepository;
+
+  private final ProductMapper productMapper;
 
   private final CategoryService categoryService;
 
@@ -60,6 +68,11 @@ public class ProductController {
       pageSize = 10;
     }
     return categoryService.findPage(page, pageSize);
+  }
+
+  @GetMapping("/list")
+  public List<ProductDto> findAll() {
+    return productRepository.findAll().stream().map(productMapper::toProductDto).collect(Collectors.toList());
   }
 
 

@@ -2,6 +2,8 @@ package com.temzu.freshcafe.mappers;
 
 import com.temzu.freshcafe.dtos.OrderDto;
 import com.temzu.freshcafe.entities.Order;
+import com.temzu.freshcafe.enums.OrderStatuses;
+import com.temzu.freshcafe.enums.OrderTypes;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

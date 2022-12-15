@@ -24,6 +24,7 @@ angular.module('market-front').controller('cartController',
       }
 
       $scope.incrementCartPosition = function (productId) {
+        console.log($rootScope.cart)
         $http({
           url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/add/' + productId,
@@ -71,6 +72,12 @@ angular.module('market-front').controller('cartController',
         }, function errorCallback(response) {
           alert(response.data.messages);
         });
+      }
+
+      $scope.filterMyData = function (input, search_param) {
+        if (input === search_param) {
+          return true;
+        }
       }
 
       $scope.loadCart();

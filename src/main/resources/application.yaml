@@ -23,8 +23,12 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
-
-
+  redis:
+    host: containers-us-west-74.railway.app
+    port: 6733
+    password: 06uo5Tkjf4913tDQCCXo
+    username: default
+    url: redis://${{ REDISUSER }}:${{ REDISPASSWORD }}@${{ REDISHOST }}:${{ REDISPORT }}
 
 utils:
   cart:

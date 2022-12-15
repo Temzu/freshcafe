@@ -65,6 +65,12 @@
         $rootScope.cart = response.data;
       });
     }
+
+    $http.get(contextPath + '/api/v1/products/list')
+    .then(function successCallback(response) {
+      $rootScope.allProducts = response.data;
+      console.log($rootScope.allProducts);
+    });
   }
 })();
 
@@ -98,15 +104,18 @@ angular.module('market-front').controller('indexController',
                 contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid + '/merge')
             .then(function successCallback(response) {
             });
+
+            $http({
+              url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
+              method: 'GET'
+            }).then(function (response) {
+              $rootScope.cart = response.data;
+            });
           }
         }, function errorCallback(response) {
           alert(response.data.messages);
         });
 
-        $http.post(contextPath + '/api/v1/cart')
-        .then(function successCallback(response) {
-          $localStorage.guestCartUuid = response.data;
-        });
       };
 
       $scope.tryToLogout = function () {
