@@ -36,7 +36,7 @@
             <a class="nav-link fs-5" href="#">О нас</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fs-5" href="#!/orders" ng-if="isUserLoggedIn()">Мои заказы</a>
+            <a class="nav-link fs-5" href="#!/account" ng-if="isUserLoggedIn()">Личный кабинет</a>
           </li>
         </ul>
       </div>
@@ -48,7 +48,7 @@
       <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link fs-5" href="#">8 (965) 278-90-89</a>
+            <a class="nav-link fs-5" href="#">8 (800) 800-80-80</a>
           </li>
           <li class="nav-item">
             <a class="fs-5 btn btn-outline-danger" href="#!/cart" ng-show="cart == null || cart.items.length == 0">Корзина</a>
@@ -130,6 +130,7 @@
 <script src="order/order.js"></script>
 <script src="cart/cart.js"></script>
 <script src="categories/categories.js"></script>
+<script src="account/account.js"></script>
 
 </body>
 </html>

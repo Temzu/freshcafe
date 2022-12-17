@@ -1,7 +1,12 @@
 .catalog-item-info {
-  padding-bottom: 72px;
+  display: flex;
   background: white;
   border-radius: 0px 0px 10px 10px;
+  height: 55px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .catalog-item-bottom {
@@ -44,17 +49,7 @@
 }
 
 .catalog-item-price {
-  font-weight: 500;
-  padding: 11px 33px;
-  text-transform: uppercase;
-  font-size: 25px;
-  line-height: 30px;
-  width: 62%;
   font-family: Gilroy-Bold, sans-serif;
-  height: 52px;
-  text-align: left;
-  border-radius: 0px 0px 0 10px;
-  color: #2b2a29;
 }
 
 .catalog-item .addcart div {

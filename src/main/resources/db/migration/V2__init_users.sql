@@ -29,7 +29,7 @@ values ('ROLE_USER'),
 
 -- password: 123456
 insert into users (login, password, email)
-values ('user@gmail.com', '$2a$12$L/aHEr7LfXA6hFQzUI5o/O7ph1jj1gZXXmUwsu3LVkm7KM77WStne', 'user@gmail.com'),
+values ('user', '$2a$12$L/aHEr7LfXA6hFQzUI5o/O7ph1jj1gZXXmUwsu3LVkm7KM77WStne', 'user@gmail.com'),
        ('admin', '$2a$12$L/aHEr7LfXA6hFQzUI5o/O7ph1jj1gZXXmUwsu3LVkm7KM77WStne', 'john_johnson@gmail.com');
 
 insert into users_roles (user_id, role_id)

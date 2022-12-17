@@ -61,4 +61,9 @@ public class UserDaoImpl implements UserDao {
         .filter(user -> passwordEncoder.matches(password, user.getPassword()))
         .orElseThrow(UserLoginOrPasswordException::new);
   }
+
+  @Override
+  public User update(User user) {
+    return userRepository.save(user);
+  }
 }

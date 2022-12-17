@@ -12,4 +12,5 @@ public interface UserDao {
 
   User findByLoginAndPassword(String login, String password);
 
+  User update(User user);
 }

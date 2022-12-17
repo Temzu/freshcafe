@@ -25,7 +25,7 @@ create table order_items
 );
 
 insert into orders (price, user_id, address, phone, client_name, order_type)
-values (28, 1, '111', '222', 'ivan', 1);
+values (28, 1, 'Улица Энергетиков 28', '89008008080', 'ivan', 1);
 
 insert into order_items (price, price_per_product, product_id, order_id, quantity)
 values (28, 28, 2, 1, 1);

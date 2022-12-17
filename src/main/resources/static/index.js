@@ -7,6 +7,7 @@
   .run(run);
 
   function config($routeProvider) {
+
     $routeProvider
     .when('/', {
       templateUrl: 'home/home.html',
@@ -36,6 +37,10 @@
       templateUrl: 'cart/cart.html',
       controller: 'cartController'
     })
+    .when('/account', {
+      templateUrl: 'account/account.html',
+      controller: 'accountController'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -43,6 +48,7 @@
   const contextPath = "http://localhost:8189/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
+
     $("#reg").click(function(){
       $("#ModalForm").modal("hide");
     });
@@ -121,10 +127,6 @@ angular.module('market-front').controller('indexController',
       $scope.tryToLogout = function () {
         $scope.clearUser();
 
-        $http.post(contextPath + '/api/v1/cart')
-        .then(function successCallback(response) {
-          $localStorage.guestCartUuid = response.data;
-        });
         $http.defaults.headers.common.Authorization = null;
 
         if ($scope.user.email) {
@@ -138,6 +140,10 @@ angular.module('market-front').controller('indexController',
 
       $scope.toRegistration = function () {
         $location.path('/registration');
+      };
+
+      $scope.toAccount = function () {
+        $location.path('/account');
       };
 
       $scope.clearUser = function () {
