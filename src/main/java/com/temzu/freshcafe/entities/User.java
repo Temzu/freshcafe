@@ -34,6 +34,12 @@ public class User {
   @Column(name = "email")
   private String email;
 
+  @Column(name = "phone")
+  private String phone;
+
+  @Column(name = "name")
+  private String name;
+
   @ManyToMany
   @JoinTable(name = "users_roles",
       joinColumns = @JoinColumn(name = "user_id"),

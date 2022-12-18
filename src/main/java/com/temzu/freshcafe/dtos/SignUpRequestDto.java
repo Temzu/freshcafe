@@ -14,6 +14,10 @@ public class SignUpRequestDto {
   @Pattern(regexp="^[A-Za-z\\d]*$", message = "Login contains invalid characters")
   private String login;
 
+  @NotBlank(message = "Name must not be blank and not be null")
+  @Size(min = 3, max = 30, message = "Name length must be between 3-30")
+  private String name;
+
   @NotBlank(message = "Password must not be blank and not be null")
   @Size(min = 6, max = 80, message = "Password length must be between 6-80")
   private String password;
@@ -21,4 +25,9 @@ public class SignUpRequestDto {
   @NotBlank(message = "Email must not be blank and not be null")
   @Email
   private String email;
+
+  @NotBlank(message = "Phone must not be blank and not be null")
+  @Size(min = 11, max = 11, message = "Phone length must be 11")
+  @Pattern(regexp="^\\d*$", message = "Phone contains invalid characters")
+  private String phone;
 }

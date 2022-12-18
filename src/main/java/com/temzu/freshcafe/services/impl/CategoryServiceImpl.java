@@ -1,6 +1,7 @@
 package com.temzu.freshcafe.services.impl;
 
 import com.temzu.freshcafe.dao.CategoryDao;
+import com.temzu.freshcafe.dtos.CategoryCreateDto;
 import com.temzu.freshcafe.dtos.CategoryDto;
 import com.temzu.freshcafe.mappers.CategoryMapper;
 import com.temzu.freshcafe.services.CategoryService;
@@ -28,5 +29,10 @@ public class CategoryServiceImpl implements CategoryService {
     return categoryDao.findAll().stream()
         .map(categoryMapper::toCategoryDto)
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public CategoryDto createCategory(CategoryCreateDto categoryCreateDto) {
+    return null;
   }
 }

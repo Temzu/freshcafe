@@ -41,6 +41,14 @@
       templateUrl: 'account/account.html',
       controller: 'accountController'
     })
+    .when('/admin', {
+      templateUrl: 'admin_panel/admin-control-panel.html',
+      controller: 'adminController'
+    })
+    .when('/test', {
+      templateUrl: 'test/test.html',
+      controller: 'testController'
+    })
     .otherwise({
       redirectTo: '/'
     });
