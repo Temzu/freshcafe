@@ -18,7 +18,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
   @Override
   public Page<Category> findPage(int page, int pageSize) {
-    return categoryRepository.findAll(PageRequest.of(page - 1, pageSize));
+    return categoryRepository.findAllByActiveStatusTrue(PageRequest.of(page - 1, pageSize));
   }
 
   @Override
@@ -38,5 +38,10 @@ public class CategoryDaoImpl implements CategoryDao {
   @Override
   public List<Category> findAll() {
     return categoryRepository.findAll();
+  }
+
+  @Override
+  public void deleteById(Long id) {
+    findById(id).setActiveStatus(false);
   }
 }

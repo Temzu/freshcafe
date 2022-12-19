@@ -31,6 +31,9 @@ public class Category {
   @Column(name = "image_name")
   private String imageName;
 
+  @Column(name = "active_status")
+  private boolean activeStatus;
+
   @OneToMany(mappedBy = "category")
   private List<Product> products;
 

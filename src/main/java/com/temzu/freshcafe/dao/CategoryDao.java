@@ -13,4 +13,6 @@ public interface CategoryDao {
   Category findByTitle(String title);
 
   List<Category> findAll();
+
+  void deleteById(Long id);
 }

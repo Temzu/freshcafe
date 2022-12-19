@@ -42,6 +42,9 @@ public class Product {
   @Column(name = "image_name")
   private String imageName;
 
+  @Column(name = "active_status")
+  private boolean activeStatus;
+
   @Column(name = "createdAt")
   @CreationTimestamp
   private LocalDateTime createdAt;

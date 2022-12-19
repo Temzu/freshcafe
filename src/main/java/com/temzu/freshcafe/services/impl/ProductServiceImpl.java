@@ -10,6 +10,7 @@ import com.temzu.freshcafe.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,6 +50,9 @@ public class ProductServiceImpl implements ProductService {
     return null;
   }
 
+  @Transactional
   @Override
-  public void deleteById(Long id) {}
+  public void deleteById(Long id) {
+    productDao.deleteById(id);
+  }
 }

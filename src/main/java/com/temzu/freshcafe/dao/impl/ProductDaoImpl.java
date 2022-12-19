@@ -25,7 +25,7 @@ public class ProductDaoImpl implements ProductDao {
 
   @Override
   public Page<Product> findPageByCategory(Category category, int page, int pageSize) {
-    return productRepository.findAllByCategory(category, PageRequest.of(page - 1, pageSize));
+    return productRepository.findAllByCategoryAndActiveStatusTrue(category, PageRequest.of(page - 1, pageSize));
   }
 
   @Override
@@ -53,6 +53,6 @@ public class ProductDaoImpl implements ProductDao {
 
   @Override
   public void deleteById(Long id) {
-    productRepository.delete(findById(id));
+    findById(id).setActiveStatus(false);
   }
 }

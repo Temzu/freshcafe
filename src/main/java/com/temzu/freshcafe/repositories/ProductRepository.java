@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-  Page<Product> findAllByCategory(Category category, Pageable pageable);
+  Page<Product> findAllByCategoryAndActiveStatusTrue(Category category, Pageable pageable);
 
   List<Product> findAllByIdIsIn(List<Long> ids);
 

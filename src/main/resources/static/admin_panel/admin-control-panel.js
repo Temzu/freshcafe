@@ -3,7 +3,7 @@ angular.module('market-front').controller('adminController',
 
       const contextPath = 'http://localhost:8189/freshcafe';
 
-      $scope.loadPage = function (pageIndex = 1) {
+      $scope.loadCategories = function (pageIndex = 1) {
         $http({
           url: contextPath + '/api/v1/categories',
           method: 'GET',
@@ -12,7 +12,20 @@ angular.module('market-front').controller('adminController',
           }
         }).then(function (response) {
           $scope.categoryPage = response.data;
-          $scope.navList = $scope.generatePagesIndexes(1, $scope.categoryPage.totalPages);
+          console.log($scope.categoryPage);
+        });
+      };
+
+      $scope.loadProduct = function (pageIndex = 1) {
+        $http({
+          url: contextPath + '/api/v1/categories',
+          method: 'GET',
+          params: {
+            page: pageIndex
+          }
+        }).then(function (response) {
+          $scope.categoryPage = response.data;
+          console.log($scope.categoryPage);
         });
       };
 
@@ -36,7 +49,6 @@ angular.module('market-front').controller('adminController',
             maxPageIndex = $scope.categoryPage.totalPages;
           }
 
-          $scope.PaginationArray = $scope.generatePagesIndexes(minPageIndex, maxPageIndex);
           console.log(response.data);
         });
       };
@@ -65,10 +77,40 @@ angular.module('market-front').controller('adminController',
             maxPageIndex = $scope.productsPage.totalPages;
           }
 
-          $scope.PaginationArray = $scope.generatePagesIndexes(minPageIndex, maxPageIndex);
           console.log(response.data);
         });
       };
+
+      $scope.deleteCategory = function (categoryId) {
+        $http({
+          url: contextPath + '/api/v1/categories/delete/' + categoryId,
+          method: 'DELETE'
+        }).then(function successCallback(response) {
+          $scope.loadCategories();
+          $("#ModalCategoriesDeleteForm" + categoryId).modal("hide");
+        });
+      }
+
+      $scope.deleteProduct = function (productId, categoryTitle = '') {
+        $http({
+          url: contextPath + '/api/v1/products/delete/' + productId,
+          method: 'DELETE'
+        }).then(function successCallback(response) {
+          $scope.showPageByCategory(categoryTitle);
+          $("#ModalProductDeleteForm" + productId).modal("hide");
+        });
+      }
+
+      $scope.addToCart = function (productId) {
+        $http({
+          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+              + '/add/' + productId,
+          method: 'GET'
+        }).then(function successCallback(response) {
+          $scope.loadCart();
+          $("#ModalCategoriesForm" + productId).modal("hide");
+        });
+      }
 
       $scope.showCategoryPage();
     });

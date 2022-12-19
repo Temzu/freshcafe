@@ -20,7 +20,23 @@
         </div>
 
         <div class="col-3">
-          <button class="btn btn-danger">Удалить</button>
+          <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalCategoriesDeleteForm{{c.id}}">
+            Удалить
+          </a>
+        </div>
+
+        <div class="modal fade" id="ModalCategoriesDeleteForm{{c.id}}" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button id="delete" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="myform bg-dark">
+                  <h1 class="text-center">Подтверждение удаления {{c.title}}</h1>
+                  <button type="button" class="btn btn-light mt-3" ng-click="deleteCategory(c.id)">Удалить</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -44,7 +60,23 @@
         </div>
 
         <div class="col-3">
-          <button class="btn btn-danger">Удалить</button>
+          <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalProductDeleteForm{{p.id}}">
+            Удалить
+          </a>
+        </div>
+
+        <div class="modal fade" id="ModalProductDeleteForm{{p.id}}" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button id="deleteProduct" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="myform bg-dark">
+                  <h1 class="text-center">Подтверждение удаления {{p.title}}</h1>
+                  <button type="button" class="btn btn-light mt-3" ng-click="deleteProduct(p.id, p.categoryTitle)">Удалить</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
