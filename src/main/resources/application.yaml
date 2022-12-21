@@ -4,6 +4,10 @@ server:
     context-path: /freshcafe
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
   application:
     name: freshcafe
   datasource:
@@ -33,3 +37,4 @@ spring:
 utils:
   cart:
     prefix: FRESHCAFE_CART_
+

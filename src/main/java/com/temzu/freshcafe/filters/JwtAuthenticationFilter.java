@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       filterChain.doFilter(httpServletRequest, httpServletResponse);
       return;
     }
+//    System.out.println(httpServletRequest.getParts().isEmpty());
 
     token = token.substring(7);
     if (!redisService.exists(token)) {

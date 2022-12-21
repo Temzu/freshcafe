@@ -83,15 +83,22 @@ public class ProductController {
   }
 
   @PreAuthorize("hasRole('ROLE_ADMIN')")
-  @PostMapping
+  @PostMapping("/create")
   public ProductDto save(@Valid @RequestBody ProductCreateDto productCreateDto) {
     return productService.save(productCreateDto);
   }
 
   @PreAuthorize("hasRole('ROLE_ADMIN')")
-  @PutMapping
-  public ProductDto update(@Valid @RequestBody ProductUpdateDto productUpdateDto) {
-    return productService.update(productUpdateDto);
+  @PutMapping("/{id}/update")
+  public ProductDto update(@PathVariable Long id, @Valid @RequestBody ProductUpdateDto productUpdateDto) {
+    return productService.update(id, productUpdateDto);
+  }
+
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PutMapping("/{id}/upload")
+  public void uploadProductImage(
+      @PathVariable Long id, @RequestParam(name = "imageUrl", required = true) String imageUrl) {
+    productService.uploadProductImage(id, imageUrl);
   }
 
   @PreAuthorize("hasRole('ROLE_ADMIN')")

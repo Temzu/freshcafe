@@ -5,6 +5,7 @@ import com.temzu.freshcafe.dao.ProductDao;
 import com.temzu.freshcafe.dtos.ProductCreateDto;
 import com.temzu.freshcafe.dtos.ProductDto;
 import com.temzu.freshcafe.dtos.ProductUpdateDto;
+import com.temzu.freshcafe.entities.Product;
 import com.temzu.freshcafe.mappers.ProductMapper;
 import com.temzu.freshcafe.services.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -40,19 +41,35 @@ public class ProductServiceImpl implements ProductService {
     return productMapper.toProductDto(productDao.findById(id));
   }
 
+  @Transactional
   @Override
   public ProductDto save(ProductCreateDto productCreateDto) {
-    return null;
+    Product newProduct = new Product();
+    newProduct.setTitle(productCreateDto.getTitle());
+    newProduct.setPrice(productCreateDto.getPrice());
+    newProduct.setCategory(categoryDao.findByTitle(productCreateDto.getCategoryTitle()));
+    newProduct.setActiveStatus(true);
+    productDao.saveOrUpdate(newProduct);
+    return productMapper.toProductDto(newProduct);
   }
 
   @Override
-  public ProductDto update(ProductUpdateDto productUpdateDto) {
-    return null;
+  public ProductDto update(Long id, ProductUpdateDto productUpdateDto) {
+    Product product = productDao.findById(id);
+    product.setTitle(productUpdateDto.getTitle());
+    product.setPrice(productUpdateDto.getPrice());
+    Product updatedProduct = productDao.saveOrUpdate(product);
+    return productMapper.toProductDto(updatedProduct);
   }
 
   @Transactional
   @Override
   public void deleteById(Long id) {
     productDao.deleteById(id);
+  }
+
+  @Override
+  public void uploadProductImage(Long id, String imageUrl) {
+    productDao.findById(id).setImageName(imageUrl);
   }
 }

@@ -3,6 +3,8 @@ angular.module('market-front').controller('adminController',
 
       const contextPath = 'http://localhost:8189/freshcafe';
 
+
+
       $scope.loadCategories = function (pageIndex = 1) {
         $http({
           url: contextPath + '/api/v1/categories',
@@ -38,18 +40,6 @@ angular.module('market-front').controller('adminController',
           }
         }).then(function (response) {
           $scope.categoryPage = response.data;
-
-          let minPageIndex = pageIndex - 2;
-          if (minPageIndex < 1) {
-            minPageIndex = 1;
-          }
-
-          let maxPageIndex = pageIndex + 2;
-          if (maxPageIndex > $scope.categoryPage.totalPages) {
-            maxPageIndex = $scope.categoryPage.totalPages;
-          }
-
-          console.log(response.data);
         });
       };
 
@@ -64,22 +54,103 @@ angular.module('market-front').controller('adminController',
         }).then(function (response) {
           $rootScope.productsPage = response.data;
           $rootScope.categoryTitle = categoryTitle;
-
-          console.log($rootScope.productsPage.content)
-
-          let minPageIndex = pageIndex - 2;
-          if (minPageIndex < 1) {
-            minPageIndex = 1;
-          }
-
-          let maxPageIndex = pageIndex + 2;
-          if (maxPageIndex > $scope.productsPage.totalPages) {
-            maxPageIndex = $scope.productsPage.totalPages;
-          }
-
-          console.log(response.data);
         });
       };
+
+      $scope.updateCategoryTitle = function (category, newTitle = category.title) {
+        category.title = newTitle;
+        $http.put(contextPath + '/api/v1/categories/update', category)
+        .then(function successCallback(response) {
+          $scope.loadCategories();
+          $("#ModalCategoryChangeForm" + category.id).modal("hide");
+        }, function errorCallback(response) {
+          alert(response.data.messages);
+        });
+      };
+
+      $scope.uploadCategoryImage = function (categoryId) {
+        let imageUrl = $('#imageInput' + categoryId).val();
+
+        $http({
+          url: contextPath + '/api/v1/categories/' + categoryId + '/upload',
+          method: 'PUT',
+          params: {
+            imageUrl: imageUrl
+          }
+        }).then(function successCallback(response) {
+          $scope.loadCategories();
+          $("#ModalCategoryChangeImageForm" + categoryId).modal("hide");
+        });
+      }
+
+
+      $scope.uploadFileToUrl = function(categoryId, url){
+
+        $http({
+          url: contextPath + url,
+          method: 'PUT',
+          params: {
+            imageUrl: pageIndex
+          }
+        }).then(function successCallback(response) {
+          $scope.loadCategories();
+          $("#ModalCategoryChangeImageForm" + categoryId).modal("hide");
+        });
+
+        // let file = new FormData();
+        //
+        // file.append('file', file1);
+        //
+        // return $http({
+        //   url: contextPath + url,
+        //   method: 'POST',
+        //   data: file,
+        //   //assign content-type as undefined, the browser
+        //   //will assign the correct boundary for us
+        //   headers: { 'Content-Type': undefined},
+        //   //prevents serializing payload.  don't do it.
+        //   transformRequest: angular.identity
+        // });
+      }
+
+      $scope.createProduct = function (categoryTitle = $rootScope.categoryTitle) {
+        $scope.newProduct.categoryTitle = categoryTitle;
+
+        $http.post(contextPath + '/api/v1/products/create', $scope.newProduct)
+        .then(function successCallback(response) {
+          $scope.showPageByCategory(categoryTitle);
+          $("#ModalProductCreateForm").modal("hide");
+        }, function errorCallback(response) {
+          alert(response.data.messages);
+        });
+      }
+
+      $scope.updateProduct = function (productId, categoryTitle = $rootScope.categoryTitle) {
+        $scope.changeProduct.categoryTitle = categoryTitle;
+
+        $http.post(contextPath + '/api/v1/products/' + productId + '/update', $scope.changeProduct)
+        .then(function successCallback(response) {
+          $scope.loadCategories();
+          $("#ModalProductChangeForm" + productId).modal("hide");
+        }, function errorCallback(response) {
+          alert(response.data.messages);
+        });
+      };
+
+      $scope.uploadProductImage = function (productId) {
+        let imageUrl = $('#imageProductInput' + productId).val();
+
+        $http({
+          url: contextPath + '/api/v1/products/' + productId + '/upload',
+          method: 'PUT',
+          params: {
+            imageUrl: imageUrl
+          }
+        }).then(function successCallback(response) {
+          $scope.loadCategories();
+          $("#ModalProductChangeImageForm" + productId).modal("hide");
+        });
+      }
 
       $scope.deleteCategory = function (categoryId) {
         $http({
@@ -88,6 +159,18 @@ angular.module('market-front').controller('adminController',
         }).then(function successCallback(response) {
           $scope.loadCategories();
           $("#ModalCategoriesDeleteForm" + categoryId).modal("hide");
+        }, function errorCallback(response) {
+          alert(response.data.messages);
+        });
+      }
+
+      $scope.createCategory = function () {
+        $http.post(contextPath + '/api/v1/categories/create', $scope.category)
+        .then(function successCallback(response) {
+          $scope.loadCategories();
+          $("#ModalCategoryCreateForm").modal("hide");
+        }, function errorCallback(response) {
+          alert(response.data.messages);
         });
       }
 
@@ -109,6 +192,8 @@ angular.module('market-front').controller('adminController',
         }).then(function successCallback(response) {
           $scope.loadCart();
           $("#ModalCategoriesForm" + productId).modal("hide");
+        }, function errorCallback(response) {
+          alert(response.data.messages);
         });
       }
 

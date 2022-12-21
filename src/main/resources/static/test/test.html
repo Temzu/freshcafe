@@ -6,14 +6,13 @@
 
   <div class="row justify-content-evenly">
 
-    <form method="post" enctype="multipart/form-data">
+    <form ng-submit="tryUploadImage()">
       <div>
         <label for="profile_pic">Choose file to upload</label>
-        <input type="file" id="profile_pic" name="profile_pic"
-               accept=".jpg, .jpeg, .png">
+        <input class="form-control-file" type="file" id="profile_pic" name="image" accept=".jpg, .jpeg, .png">
       </div>
       <div>
-        <button>Submit</button>
+        <button class="btn btn-primary">Submit</button>
       </div>
     </form>
 
@@ -27,7 +26,14 @@
       </div>
     </form>
 
+    <form>
+      <input type="file" id="fileinput" accept=".jpg, .jpeg, .png">
+      <button type="submit" ng-click="uploadImage()">Создать</button>
+    </form>
+
   </div>
+
+
 
   <script>
     var test = document.querySelector('input');

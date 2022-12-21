@@ -16,8 +16,9 @@ public interface ProductService {
 
   ProductDto save(ProductCreateDto productCreateDto);
 
-  ProductDto update(ProductUpdateDto productUpdateDto);
+  ProductDto update(Long id, ProductUpdateDto productUpdateDto);
 
   void deleteById(Long id);
 
+  void uploadProductImage(Long id, String imageUrl);
 }
