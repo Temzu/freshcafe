@@ -114,6 +114,7 @@ angular.module('market-front').controller('adminController',
       }
 
       $scope.createProduct = function (categoryTitle = $rootScope.categoryTitle) {
+        console.log($scope.newProduct);
         $scope.newProduct.categoryTitle = categoryTitle;
 
         $http.post(contextPath + '/api/v1/products/create', $scope.newProduct)
@@ -126,15 +127,31 @@ angular.module('market-front').controller('adminController',
       }
 
       $scope.updateProduct = function (productId, categoryTitle = $rootScope.categoryTitle) {
-        $scope.changeProduct.categoryTitle = categoryTitle;
+        let newTitle = $('#inputProductChangeTitle' + productId).val();
+        let newPrice = $('#inputProductChangePrice' + productId).val();
 
-        $http.post(contextPath + '/api/v1/products/' + productId + '/update', $scope.changeProduct)
+        let updateProduct = {
+          'id': productId,
+          'categoryTitle': categoryTitle,
+          'title': newTitle,
+          'price': newPrice
+        }
+
+        $http.put(contextPath + '/api/v1/products/' + productId + '/update', updateProduct)
         .then(function successCallback(response) {
-          $scope.loadCategories();
+          $scope.showPageByCategory(categoryTitle);
           $("#ModalProductChangeForm" + productId).modal("hide");
+
+          $http.get(contextPath + '/api/v1/products/list')
+          .then(function successCallback(response) {
+            $rootScope.allProducts = response.data;
+          });
+
         }, function errorCallback(response) {
           alert(response.data.messages);
         });
+
+
       };
 
       $scope.uploadProductImage = function (productId) {
@@ -147,8 +164,16 @@ angular.module('market-front').controller('adminController',
             imageUrl: imageUrl
           }
         }).then(function successCallback(response) {
-          $scope.loadCategories();
+          $scope.showPageByCategory($rootScope.categoryTitle);
           $("#ModalProductChangeImageForm" + productId).modal("hide");
+
+          $http.get(contextPath + '/api/v1/products/list')
+          .then(function successCallback(response) {
+            $rootScope.allProducts = response.data;
+          });
+
+        }, function errorCallback(response) {
+          alert(response.data.messages);
         });
       }
 

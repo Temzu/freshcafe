@@ -11,7 +11,7 @@
       <div class="row cart-product" ng-repeat="oi in cart.items">
 
         <div class="col-2 cart-product-img" ng-repeat="p in allProducts | filter:{id : oi.productId} : true">
-          <img src="./images/products/{{p.imageName}}" alt="">
+          <img src="{{p.imageName}}" alt="">
         </div>
 
         <div class="col-5">

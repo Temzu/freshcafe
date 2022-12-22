@@ -182,7 +182,7 @@
                   <div class="modal-body text-center">
 
                     <div class="input-group">
-                      <input type="text" id="inputProductChangeId" ng-model="changeProduct.id" hidden>
+                      <input type="text" id="inputProductChangeId{{p.id}}" ng-model="changeProduct.id" hidden>
                     </div>
 
                     <div class="input-group">
@@ -235,7 +235,7 @@
                   </div>
 
                   <div class="modal-footer">
-                    <button type="submit" ng-click="uploadCategoryImage(c.id)">Сохранить</button>
+                    <button type="submit" ng-click="uploadProductImage(p.id)">Сохранить</button>
                   </div>
 
                 </form>

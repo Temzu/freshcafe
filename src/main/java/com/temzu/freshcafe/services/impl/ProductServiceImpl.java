@@ -68,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
     productDao.deleteById(id);
   }
 
+  @Transactional
   @Override
   public void uploadProductImage(Long id, String imageUrl) {
     productDao.findById(id).setImageName(imageUrl);
