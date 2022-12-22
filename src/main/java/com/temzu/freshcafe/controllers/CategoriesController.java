@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import javax.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,6 +36,9 @@ public class CategoriesController {
 
   private final ProductService productService;
 
+  @Value("${spring.redis.host}")
+  private String redis;
+
   @GetMapping
   public Page<CategoryDto> findActivePage(
       @RequestParam(name = "page", defaultValue = "1") Integer page,
@@ -43,6 +47,7 @@ public class CategoriesController {
       page = 1;
       pageSize = 50;
     }
+    System.out.println(redis);
     return categoryService.findPage(page, pageSize);
   }
 
