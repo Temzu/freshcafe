@@ -1,6 +1,8 @@
 package com.temzu.freshcafe.mappers;
 
+import com.temzu.freshcafe.dtos.CategoryCreateDto;
 import com.temzu.freshcafe.dtos.CategoryDto;
+import com.temzu.freshcafe.dtos.CategoryUpdateDto;
 import com.temzu.freshcafe.dtos.ProductDto;
 import com.temzu.freshcafe.entities.Category;
 import com.temzu.freshcafe.entities.Product;
@@ -16,6 +18,14 @@ public class CategoryMapper {
 
   public CategoryDto toCategoryDto(Category category) {
     return mapper.map(category, CategoryDto.class);
+  }
+
+  public Category toCategory(CategoryCreateDto categoryCreateDto) {
+    return mapper.map(categoryCreateDto, Category.class);
+  }
+
+  public Category toCategory(CategoryUpdateDto categoryUpdateDto) {
+    return mapper.map(categoryUpdateDto, Category.class);
   }
 
 }

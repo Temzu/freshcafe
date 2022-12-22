@@ -5,6 +5,7 @@ import com.temzu.freshcafe.entities.Category;
 import com.temzu.freshcafe.entities.Product;
 import com.temzu.freshcafe.exceptions.ResourceNotFoundException;
 import com.temzu.freshcafe.repositories.ProductRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,13 +19,20 @@ public class ProductDaoImpl implements ProductDao {
 
   @Override
   public Page<Product> findPage(int page, int pageSize) {
+
     return productRepository.findAll(PageRequest.of(page - 1, pageSize));
   }
 
   @Override
   public Page<Product> findPageByCategory(Category category, int page, int pageSize) {
-    return productRepository.findAllByCategory(category, PageRequest.of(page - 1, pageSize));
+    return productRepository.findAllByCategoryAndActiveStatusTrue(category, PageRequest.of(page - 1, pageSize));
   }
+
+  @Override
+  public List<Product> findAllByIdIsIn(List<Long> ids) {
+    return productRepository.findAllByIdIsIn(ids);
+  }
+
 
   @Override
   public Product findById(Long id) {
@@ -45,6 +53,6 @@ public class ProductDaoImpl implements ProductDao {
 
   @Override
   public void deleteById(Long id) {
-    productRepository.delete(findById(id));
+    findById(id).setActiveStatus(false);
   }
 }

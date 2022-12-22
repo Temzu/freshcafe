@@ -1,6 +1,7 @@
 package com.temzu.freshcafe.dao.impl;
 
 import com.temzu.freshcafe.dao.CategoryDao;
+import com.temzu.freshcafe.dtos.CategoryDto;
 import com.temzu.freshcafe.entities.Category;
 import com.temzu.freshcafe.exceptions.ResourceNotFoundException;
 import com.temzu.freshcafe.repositories.CategoryRepository;
@@ -18,6 +19,11 @@ public class CategoryDaoImpl implements CategoryDao {
 
   @Override
   public Page<Category> findPage(int page, int pageSize) {
+    return categoryRepository.findAllByActiveStatusTrue(PageRequest.of(page - 1, pageSize));
+  }
+
+  @Override
+  public Page<Category> findPageAll(int page, int pageSize) {
     return categoryRepository.findAll(PageRequest.of(page - 1, pageSize));
   }
 
@@ -38,5 +44,21 @@ public class CategoryDaoImpl implements CategoryDao {
   @Override
   public List<Category> findAll() {
     return categoryRepository.findAll();
+  }
+
+  @Override
+  public Category create(Category category) {
+    category.setActiveStatus(true);
+    return categoryRepository.save(category);
+  }
+
+  @Override
+  public void deleteById(Long id) {
+    findById(id).setActiveStatus(false);
+  }
+
+  @Override
+  public Category update(Category toCategory) {
+    return categoryRepository.save(toCategory);
   }
 }

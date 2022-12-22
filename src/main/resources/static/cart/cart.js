@@ -1,13 +1,13 @@
 angular.module('market-front').controller('cartController',
-    function ($scope, $http, $localStorage) {
-      const contextPath = 'http://localhost:8189/market';
+    function ($scope, $http, $localStorage, $rootScope) {
+      const contextPath = 'http://localhost:8189/freshcafe';
 
       $scope.loadCart = function () {
         $http({
           url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
           method: 'GET'
         }).then(function (response) {
-          $scope.cart = response.data;
+          $rootScope.cart = response.data;
         });
       }
 
@@ -24,6 +24,7 @@ angular.module('market-front').controller('cartController',
       }
 
       $scope.incrementCartPosition = function (productId) {
+        console.log($rootScope.cart)
         $http({
           url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/add/' + productId,
@@ -49,7 +50,7 @@ angular.module('market-front').controller('cartController',
               + '/clear',
           method: 'GET'
         }).then(function (response) {
-          $scope.cart = null;
+          $rootScope.cart = null;
         });
       }
 
@@ -71,6 +72,12 @@ angular.module('market-front').controller('cartController',
         }, function errorCallback(response) {
           alert(response.data.messages);
         });
+      }
+
+      $scope.filterMyData = function (input, search_param) {
+        if (input === search_param) {
+          return true;
+        }
       }
 
       $scope.loadCart();

@@ -4,6 +4,10 @@ server:
     context-path: /freshcafe
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
   application:
     name: freshcafe
   datasource:
@@ -23,3 +27,14 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
+  redis:
+    host: containers-us-west-74.railway.app
+    port: 6733
+    password: 06uo5Tkjf4913tDQCCXo
+    username: default
+    url: redis://${{ REDISUSER }}:${{ REDISPASSWORD }}@${{ REDISHOST }}:${{ REDISPORT }}
+
+utils:
+  cart:
+    prefix: FRESHCAFE_CART_
+

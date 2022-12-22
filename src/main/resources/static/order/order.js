@@ -1,5 +1,5 @@
 angular.module('market-front').controller('ordersController', function ($scope, $http) {
-  const contextPath = "http://localhost:8189/market";
+  const contextPath = "http://localhost:8189/freshcafe";
 
   $scope.showMyOrders = function (pageIndex = 1) {
     $http({
@@ -10,6 +10,7 @@ angular.module('market-front').controller('ordersController', function ($scope, 
       }
     }).then(function (response) {
       $scope.orderPage = response.data;
+      console.log($scope.orderPage.content)
       $scope.navList = $scope.generatePagesIndexes(1, $scope.orderPage.totalPages);
     });
   };

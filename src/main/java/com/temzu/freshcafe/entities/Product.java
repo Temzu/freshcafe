@@ -1,5 +1,6 @@
 package com.temzu.freshcafe.entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,11 +33,17 @@ public class Product {
   @JoinColumn(name = "category_id")
   private Category category;
 
+  @Column(name = "price")
+  private BigDecimal price;
+
   @Column(name = "description")
   private String description;
 
   @Column(name = "image_name")
   private String imageName;
+
+  @Column(name = "active_status")
+  private boolean activeStatus;
 
   @Column(name = "createdAt")
   @CreationTimestamp

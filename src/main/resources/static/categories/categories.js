@@ -1,6 +1,6 @@
 angular.module('market-front').controller("categoriesController",
-    function ($scope, $http, $localStorage, $routeParams, $rootScope) {
-      const contextPath = "https://localhost:8189/freshcafe";
+    function ($scope, $http, $localStorage, $routeParams, $rootScope, $location) {
+      const contextPath = "http://localhost:8189/freshcafe";
 
       // $scope.categoryTitle = $routeParams.categoryTitle;
 
@@ -50,9 +50,10 @@ angular.module('market-front').controller("categoriesController",
             page: pageIndex
           }
         }).then(function (response) {
-          console.log(categoryTitle + " " + "huy")
           $rootScope.productsPage = response.data;
           $rootScope.categoryTitle = categoryTitle;
+
+          console.log($rootScope.productsPage.content)
 
           let minPageIndex = pageIndex - 2;
           if (minPageIndex < 1) {
@@ -69,6 +70,26 @@ angular.module('market-front').controller("categoriesController",
         });
       };
 
+      $scope.addToCart = function (productId) {
+        $http({
+          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+              + '/add/' + productId,
+          method: 'GET'
+        }).then(function successCallback(response) {
+          $scope.loadCart();
+          $("#ModalCategoriesForm" + productId).modal("hide");
+        });
+      }
+
+      $scope.loadCart = function () {
+        $http({
+          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
+          method: 'GET'
+        }).then(function (response) {
+          $rootScope.cart = response.data;
+        });
+      }
+
       $scope.generatePagesIndexes = function (startPage, endPage) {
         let arr = [];
         for (let i = startPage; i < endPage + 1; i++) {
@@ -78,6 +99,7 @@ angular.module('market-front').controller("categoriesController",
       }
 
       $scope.showCategoryPage();
+      $scope.url = $location.absUrl().split('/')[6];
+      $scope.showPageByCategory(decodeURIComponent($scope.url));
 
-      // $scope.showPageByCategory($scope.categoryTitle);
     })

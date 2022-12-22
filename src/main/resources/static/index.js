@@ -7,6 +7,7 @@
   .run(run);
 
   function config($routeProvider) {
+
     $routeProvider
     .when('/', {
       templateUrl: 'home/home.html',
@@ -36,13 +37,26 @@
       templateUrl: 'cart/cart.html',
       controller: 'cartController'
     })
+    .when('/account', {
+      templateUrl: 'account/account.html',
+      controller: 'accountController'
+    })
+    .when('/admin', {
+      templateUrl: 'admin_panel/admin-control-panel.html',
+      controller: 'adminController'
+    })
+    .when('/test', {
+      templateUrl: 'test/test.html',
+      controller: 'testController'
+    })
     .otherwise({
       redirectTo: '/'
     });
   }
-  const contextPath = "https://localhost:8189/freshcafe";
+  const contextPath = "http://localhost:8189/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
+
     $("#reg").click(function(){
       $("#ModalForm").modal("hide");
     });
@@ -57,15 +71,27 @@
         $localStorage.guestCartUuid = response.data.value;
         console.log($localStorage.guestCartUuid);
       });
+    } else {
+      $http({
+        url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
+        method: 'GET'
+      }).then(function (response) {
+        $rootScope.cart = response.data;
+      });
     }
+
+    $http.get(contextPath + '/api/v1/products/list')
+    .then(function successCallback(response) {
+      $rootScope.allProducts = response.data;
+      console.log($rootScope.allProducts);
+    });
   }
 })();
 
 angular.module('market-front').controller('indexController',
     function ($rootScope, $scope, $http, $localStorage, $location) {
-      console.log("sdfsdf")
 
-      const contextPath = "https://localhost:8189/freshcafe";
+      const contextPath = "http://localhost:8189/freshcafe";
 
       let myModal = document.getElementById('ModalForm');
 
@@ -76,41 +102,43 @@ angular.module('market-front').controller('indexController',
           if (response.data.token) {
             $http.defaults.headers.common.Authorization = response.data.token;
             $localStorage.currentUser = {
-              login: $scope.user.login,
+              email: $scope.user.email,
               token: response.data.token
             };
 
-            $scope.currentUserName = $scope.user.login;
+            $scope.currentUserName = $scope.user.email;
 
-            $scope.user.login = null;
+            $scope.user.email = null;
             $scope.user.password = null;
+
+            $("#ModalForm").modal("hide");
+            $location.path('/categories');
 
             $http.get(
                 contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid + '/merge')
             .then(function successCallback(response) {
+            });
+
+            $http({
+              url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
+              method: 'GET'
+            }).then(function (response) {
+              $rootScope.cart = response.data;
             });
           }
         }, function errorCallback(response) {
           alert(response.data.messages);
         });
 
-        $http.post(contextPath + '/api/v1/cart')
-        .then(function successCallback(response) {
-          $localStorage.guestCartUuid = response.data;
-        });
       };
 
       $scope.tryToLogout = function () {
         $scope.clearUser();
 
-        $http.post(contextPath + '/api/v1/cart')
-        .then(function successCallback(response) {
-          $localStorage.guestCartUuid = response.data;
-        });
+        $http.defaults.headers.common.Authorization = null;
 
-        $location.path('/');
-        if ($scope.user.login) {
-          $scope.user.login = null;
+        if ($scope.user.email) {
+          $scope.user.email = null;
         }
         if ($scope.user.password) {
           $scope.user.password = null;
@@ -119,8 +147,11 @@ angular.module('market-front').controller('indexController',
       };
 
       $scope.toRegistration = function () {
-        console.log("sdfsdfw")
         $location.path('/registration');
+      };
+
+      $scope.toAccount = function () {
+        $location.path('/account');
       };
 
       $scope.clearUser = function () {
@@ -143,4 +174,12 @@ angular.module('market-front').controller('indexController',
           return false;
         }
       };
+
+      $scope.isCartEmpty = function () {
+        if ($rootScope.cart == null || $rootScope.cart.items.length === 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     });
