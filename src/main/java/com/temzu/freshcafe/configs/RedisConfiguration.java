@@ -1,8 +1,10 @@
 package com.temzu.freshcafe.configs;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
@@ -12,9 +14,25 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @EnableRedisRepositories
 public class RedisConfiguration {
+
+  @Value("${spring.redis.password}")
+  private String redisPassword;
+
+  @Value("${spring.redis.host}")
+  private String redisHost;
+
+  @Value("${spring.redis.username}")
+  private String redisUserName;
+
+  @Value("${spring.redis.port}")
+  private int redisPort;
+
   @Bean
   public RedisConnectionFactory jedisConnectionFactory() {
-    return new JedisConnectionFactory();
+    RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(redisHost, redisPort);
+    config.setPassword(redisPassword);
+    config.setUsername(redisUserName);
+    return new JedisConnectionFactory(config);
   }
 
   @Bean
