@@ -15,24 +15,24 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @EnableRedisRepositories
 public class RedisConfiguration {
 
-  @Value("${spring.redis.password}")
-  private String redisPassword;
-
-  @Value("${spring.redis.host}")
-  private String redisHost;
-
-  @Value("${spring.redis.username}")
-  private String redisUserName;
-
-  @Value("${spring.redis.port}")
-  private int redisPort;
+//  @Value("${spring.redis.password}")
+//  private String redisPassword;
+//
+//  @Value("${spring.redis.host}")
+//  private String redisHost;
+//
+//  @Value("${spring.redis.username}")
+//  private String redisUserName;
+//
+//  @Value("${spring.redis.port}")
+//  private int redisPort;
 
   @Bean
   public RedisConnectionFactory jedisConnectionFactory() {
-    RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(redisHost, redisPort);
-    config.setPassword(redisPassword);
-    config.setUsername(redisUserName);
-    return new JedisConnectionFactory(config);
+//    RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(redisHost, redisPort);
+//    config.setPassword(redisPassword);
+//    config.setUsername(redisUserName);
+    return new JedisConnectionFactory();
   }
 
   @Bean

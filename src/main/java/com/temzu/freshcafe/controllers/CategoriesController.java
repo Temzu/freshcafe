@@ -36,9 +36,6 @@ public class CategoriesController {
 
   private final ProductService productService;
 
-  @Value("${spring.redis.host}")
-  private String redis;
-
   @GetMapping
   public Page<CategoryDto> findActivePage(
       @RequestParam(name = "page", defaultValue = "1") Integer page,
@@ -47,7 +44,6 @@ public class CategoriesController {
       page = 1;
       pageSize = 50;
     }
-    System.out.println(redis);
     return categoryService.findPage(page, pageSize);
   }
 
