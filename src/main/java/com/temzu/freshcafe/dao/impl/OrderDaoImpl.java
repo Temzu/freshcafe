@@ -3,7 +3,11 @@ package com.temzu.freshcafe.dao.impl;
 import com.temzu.freshcafe.dao.OrderDao;
 import com.temzu.freshcafe.entities.Order;
 import com.temzu.freshcafe.entities.User;
+import com.temzu.freshcafe.enums.OrderStatuses;
+import com.temzu.freshcafe.exceptions.ResourceNotFoundException;
 import com.temzu.freshcafe.repositories.OrderRepository;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,8 +25,26 @@ public class OrderDaoImpl implements OrderDao {
   }
 
   @Override
+  public Order findById(Long id) {
+    return orderRepository
+        .findById(id)
+        .orElseThrow(() -> ResourceNotFoundException.byId(id, Order.class));
+  }
+
+  @Override
   public Order saveOrUpdate(Order order) {
     return orderRepository.save(order);
   }
-}
 
+  @Override
+  public List<Order> findAll() {
+    return orderRepository.findAll();
+  }
+
+  @Override
+  public void changeStatus(Long id) {
+    Order order = findById(id);
+    order.setOrderStatusValue(order.getOrderStatusValue() + 1);
+    orderRepository.save(order);
+  }
+}

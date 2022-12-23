@@ -2,6 +2,7 @@ package com.temzu.freshcafe.services;
 
 import com.temzu.freshcafe.dtos.OrderCreateDto;
 import com.temzu.freshcafe.dtos.OrderDto;
+import java.util.List;
 import org.springframework.data.domain.Page;
 
 public interface OrderService {
@@ -10,4 +11,7 @@ public interface OrderService {
 
   void createOrder(String login, OrderCreateDto orderCreateDto);
 
+  List<OrderDto> findAll();
+
+  void changeStatus(Long id);
 }

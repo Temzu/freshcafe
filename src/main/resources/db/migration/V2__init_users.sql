@@ -27,7 +27,8 @@ CREATE TABLE users_roles
 
 insert into roles (name)
 values ('ROLE_USER'),
-       ('ROLE_ADMIN');
+       ('ROLE_ADMIN'),
+       ('ROLE_MANAGER');
 
 -- password: 123456
 insert into users (login, password, email, phone, name)

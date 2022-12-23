@@ -14,6 +14,7 @@ import com.temzu.freshcafe.services.CartService;
 import com.temzu.freshcafe.services.OrderService;
 import com.temzu.freshcafe.services.RedisService;
 import com.temzu.freshcafe.util.Cart;
+import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -72,5 +73,17 @@ public class OrderServiceImpl implements OrderService {
     cart.clear();
     orderDao.saveOrUpdate(order);
     redisService.set(cartService.getCartUuidFromSuffix(login), cart);
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public List<OrderDto> findAll() {
+    return orderDao.findAll().stream().map(orderMapper::toOrderDto).collect(Collectors.toList());
+  }
+
+  @Transactional
+  @Override
+  public void changeStatus(Long id) {
+    orderDao.changeStatus(id);
   }
 }

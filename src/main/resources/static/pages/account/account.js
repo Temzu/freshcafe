@@ -1,7 +1,7 @@
 angular.module('market-front').controller('accountController',
     function ($scope, $http, $localStorage, $rootScope) {
 
-      const contextPath = 'https://freshcafe-production.up.railway.app/freshcafe';
+      const contextPath = 'http://localhost:8189/freshcafe';
 
       $scope.loadAccountInfo = function () {
         $http({

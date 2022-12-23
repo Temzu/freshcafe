@@ -24,8 +24,11 @@ create table order_items
     updated_at        timestamp default current_timestamp
 );
 
-insert into orders (price, user_id, address, phone, client_name, order_type)
-values (28, 1, 'Улица Энергетиков 28', '89008008080', 'ivan', 1);
+insert into orders (price, user_id, address, phone, client_name, order_type, order_status)
+values (28, 1, 'Улица Энергетиков 28', '89008008080', 'ivan', 1, 1),
+       (1238, 1, 'Улица Энергетиков 28', '89008008080', 'ivan', 2, 2),
+       (212318, 1, 'Улица Энергетиков 28', '89008008080', 'ivan', 1, 3),
+       (2118, 1, 'Улица Энергетиков 28', '89008008080', 'ivan', 2, 4);
 
 insert into order_items (price, price_per_product, product_id, order_id, quantity)
 values (28, 28, 2, 1, 1);

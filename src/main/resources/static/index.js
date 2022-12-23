@@ -10,50 +10,54 @@
 
     $routeProvider
     .when('/', {
-      templateUrl: 'home/home.html',
+      templateUrl: 'pages/home/home.html',
       controller: 'homeController'
     })
     .when('/products', {
-      templateUrl: 'menu/categories.html',
+      templateUrl: 'pages/menu/categories.html',
       controller: 'productsController'
     })
     .when('/categories', {
-      templateUrl: 'categories/categories.html',
+      templateUrl: 'pages/categories/categories.html',
       controller: 'categoriesController'
     })
     .when('/categories/:categoryTitle', {
-      templateUrl: 'categories/categories_item.html',
+      templateUrl: 'pages/categories/categories_item.html',
       controller: 'categoriesController'
     })
     .when('/registration', {
-      templateUrl: 'registration/registration.html',
+      templateUrl: 'pages/registration/registration.html',
       controller: 'registrationController'
     })
     .when('/orders', {
-      templateUrl: 'order/order.html',
+      templateUrl: 'pages/order/order.html',
       controller: 'ordersController'
     })
     .when('/cart', {
-      templateUrl: 'cart/cart.html',
+      templateUrl: 'pages/cart/cart.html',
       controller: 'cartController'
     })
     .when('/account', {
-      templateUrl: 'account/account.html',
+      templateUrl: 'pages/account/account.html',
       controller: 'accountController'
     })
+    .when('/manager', {
+      templateUrl: 'pages/manager/manager.html',
+      controller: 'managerController'
+    })
     .when('/admin', {
-      templateUrl: 'admin_panel/admin-control-panel.html',
+      templateUrl: 'pages/admin_panel/admin-control-panel.html',
       controller: 'adminController'
     })
     .when('/test', {
-      templateUrl: 'test/test.html',
+      templateUrl: 'pages/test/test.html',
       controller: 'testController'
     })
     .otherwise({
       redirectTo: '/'
     });
   }
-  const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
+  const contextPath = "http://localhost:8189/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
 
@@ -91,7 +95,7 @@
 angular.module('market-front').controller('indexController',
     function ($rootScope, $scope, $http, $localStorage, $location) {
 
-      const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
+      const contextPath = "http://localhost:8189/freshcafe";
 
       let myModal = document.getElementById('ModalForm');
 
