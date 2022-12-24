@@ -1,6 +1,6 @@
 angular.module('market-front').controller("registrationController",
     function ($scope, $http, $localStorage, $location) {
-      const contextPath = "https://freshcafe-production.up.railway.app//freshcafe";
+      const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
 
       $scope.tryToSignUp = function () {
         $http.post(contextPath + '/api/v1/auth/signup', $scope.user)

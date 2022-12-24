@@ -1,5 +1,5 @@
 angular.module('market-front').controller('ordersController', function ($scope, $http) {
-  const contextPath = "https://freshcafe-production.up.railway.app//freshcafe";
+  const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
 
   $scope.showMyOrders = function (pageIndex = 1) {
     $http({
