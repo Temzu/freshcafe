@@ -44,7 +44,11 @@ public class OrderDaoImpl implements OrderDao {
   @Override
   public void changeStatus(Long id) {
     Order order = findById(id);
-    order.setOrderStatusValue(order.getOrderStatusValue() + 1);
+    int newStatus = order.getOrderStatusValue() + 1;
+    if (newStatus > 4) {
+      newStatus = 4;
+    }
+    order.setOrderStatusValue(newStatus);
     orderRepository.save(order);
   }
 }
