@@ -1,6 +1,6 @@
 angular.module('market-front').controller('managerController', function ($scope, $http) {
 
-  const contextPath = "http://localhost:8189/freshcafe";
+  const contextPath = "https://freshcafe-production.up.railway.app//freshcafe";
 
   $scope.activeCustomer='Обрабатывается';
 

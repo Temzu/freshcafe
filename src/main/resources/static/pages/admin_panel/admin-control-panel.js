@@ -1,8 +1,7 @@
 angular.module('market-front').controller('adminController',
     function ($scope, $http, $localStorage, $rootScope) {
 
-      const contextPath = 'http://localhost:8189/freshcafe';
-
+      const contextPath = 'https://freshcafe-production.up.railway.app//freshcafe';
 
 
       $scope.loadCategories = function (pageIndex = 1) {
@@ -57,15 +56,21 @@ angular.module('market-front').controller('adminController',
         });
       };
 
-      $scope.updateCategoryTitle = function (category, newTitle = category.title) {
-        category.title = newTitle;
-        $http.put(contextPath + '/api/v1/categories/update', category)
+      $scope.updateCategoryTitle = function (categoryId) {
+        let newTitle = $('#inputCategoryChangeTitle' + categoryId).val();
+
+        let updateTitle = {
+          'id': categoryId,
+          'title': newTitle
+        }
+
+        $http.put(contextPath + '/api/v1/categories/update', updateTitle)
         .then(function successCallback(response) {
-          $scope.loadCategories();
-          $("#ModalCategoryChangeForm" + category.id).modal("hide");
-        }, function errorCallback(response) {
-          alert(response.data.messages);
-        });
+            $scope.loadCategories();
+            $("#ModalCategoryChangeForm" + categoryId).modal("hide");
+          }, function errorCallback(response) {
+            alert(response.data.messages);
+          });
       };
 
       $scope.uploadCategoryImage = function (categoryId) {
@@ -129,13 +134,15 @@ angular.module('market-front').controller('adminController',
       $scope.updateProduct = function (productId, categoryTitle = $rootScope.categoryTitle) {
         let newTitle = $('#inputProductChangeTitle' + productId).val();
         let newPrice = $('#inputProductChangePrice' + productId).val();
+        let newDescription = $('#inputProductChangeDescription' + productId).val();
 
         let updateProduct = {
           'id': productId,
-          'categoryTitle': categoryTitle,
           'title': newTitle,
-          'price': newPrice
-        }
+          'categoryTitle': categoryTitle,
+          'price': newPrice,
+          'description': newDescription
+        };
 
         $http.put(contextPath + '/api/v1/products/' + productId + '/update', updateProduct)
         .then(function successCallback(response) {
@@ -150,9 +157,12 @@ angular.module('market-front').controller('adminController',
         }, function errorCallback(response) {
           alert(response.data.messages);
         });
-
-
       };
+
+      $scope.changeModal = function (productId) {
+        $("#ModalProductChangeForm" + productId).modal("hide");
+        $("#ModalProductChangeImageForm" + productId).modal("show");
+      }
 
       $scope.uploadProductImage = function (productId) {
         let imageUrl = $('#imageProductInput' + productId).val();

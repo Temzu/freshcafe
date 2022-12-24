@@ -44,21 +44,21 @@
             <div class="modal-content">
               <div class="modal-body">
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                <form class="bg-dark" ng-submit="updateCategoryTitle(c, category.title)">
+                <form class="bg-dark" ng-submit="updateCategoryTitle(c.id)">
 
                   <div class="modal-header fs-2 text-center" style="color:white;">
                     Введите новое название категории
                   </div>
 
                   <div class="modal-body text-center">
-                    <input type="text" id="inputCategoryChangeTitle" ng-model="category.title" required>
+                    <div class="input-group">
+                      <label class="input-group-text" for="inputCategoryChangeTitle{{c.id}}">Название</label>
+                      <input type="text" id="inputCategoryChangeTitle{{c.id}}" value="{{c.title}}" required>
+                    </div>
                   </div>
 
                   <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#ModalCategoryChangeImageForm{{c.id}}" data-bs-toggle="modal" data-bs-dismiss="modal">Изменить картинку</button>
-                  </div>
-
-                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-target="#ModalCategoryChangeImageForm{{c.id}}" data-bs-toggle="modal" data-bs-dismiss="modal">Изменить картинку</button>
                     <button type="submit" class="btn btn-dark">Сохранить</button>
                   </div>
 
@@ -190,22 +190,24 @@
                     </div>
 
                     <div class="input-group">
-                      <label class="input-group-text" for="inputProductChangeTitle{{p.id}}">Новое название</label>
-                      <input type="text" id="inputProductChangeTitle{{p.id}}" ng-model="changeProduct.title" required>
+                      <label class="input-group-text" for="inputProductChangeTitle{{p.id}}" >Новое название</label>
+                      <input type="text" id="inputProductChangeTitle{{p.id}}" value="{{p.title}}" required>
                     </div>
 
                     <div class=" input-group">
                       <label class="input-group-text" for="inputProductChangePrice{{p.id}}">Новая цена</label>
-                      <input type="text" id="inputProductChangePrice{{p.id}}" ng-model="changeProduct.price" required>
+                      <input type="text" id="inputProductChangePrice{{p.id}}" value="{{p.price}}" required>
+                    </div>
+
+                    <div class=" input-group">
+                      <label class="input-group-text" for="inputProductChangeDescription{{p.id}}">Новое описание</label>
+                      <input type="text" id="inputProductChangeDescription{{p.id}}" value="{{p.description}}" required>
                     </div>
 
                   </div>
 
                   <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#ModalProductChangeImageForm{{p.id}}" data-bs-toggle="modal" data-bs-dismiss="modal">Изменить картинку</button>
-                  </div>
-
-                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="changeModal(p.id)">Изменить картинку</button>
                     <button type="submit" class="btn btn-dark">Сохранить</button>
                   </div>
 

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Data;
 
@@ -26,4 +27,8 @@ public class ProductUpdateDto {
   @NotBlank(message = "Category title must not be blank")
   @NotNull(message = "Category title must be not null")
   private String categoryTitle;
+
+  @NotBlank(message = "Description must not be blank and not be null")
+  @Size(min = 3, max = 255, message = "Description length must be between 3-255")
+  private String description;
 }

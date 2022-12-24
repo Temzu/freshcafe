@@ -1,6 +1,6 @@
 angular.module('market-front').controller('cartController',
     function ($scope, $http, $localStorage, $rootScope) {
-      const contextPath = 'http://localhost:8189/freshcafe';
+      const contextPath = 'https://freshcafe-production.up.railway.app//freshcafe';
 
       $scope.loadCart = function () {
         $http({
@@ -24,7 +24,6 @@ angular.module('market-front').controller('cartController',
       }
 
       $scope.incrementCartPosition = function (productId) {
-        console.log($rootScope.cart)
         $http({
           url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/add/' + productId,
@@ -67,7 +66,7 @@ angular.module('market-front').controller('cartController',
       $scope.createOrder = function () {
         $http.post(contextPath + '/api/v1/orders', $scope.order_info)
         .then(function (response) {
-          alert('Order created');
+          alert('Заказ создан');
           $scope.loadCart();
         }, function errorCallback(response) {
           alert(response.data.messages);
@@ -79,6 +78,12 @@ angular.module('market-front').controller('cartController',
           return true;
         }
       }
+
+      $http.get(contextPath + '/api/v1/products/list')
+      .then(function successCallback(response) {
+        $rootScope.allProducts = response.data;
+        console.log($rootScope.allProducts);
+      });
 
       $scope.loadCart();
     });

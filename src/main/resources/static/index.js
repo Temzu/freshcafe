@@ -57,7 +57,7 @@
       redirectTo: '/'
     });
   }
-  const contextPath = "http://localhost:8189/freshcafe";
+  const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
 
@@ -84,18 +84,14 @@
       });
     }
 
-    $http.get(contextPath + '/api/v1/products/list')
-    .then(function successCallback(response) {
-      $rootScope.allProducts = response.data;
-      console.log($rootScope.allProducts);
-    });
+
   }
 })();
 
 angular.module('market-front').controller('indexController',
     function ($rootScope, $scope, $http, $localStorage, $location) {
 
-      const contextPath = "http://localhost:8189/freshcafe";
+      const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
 
       let myModal = document.getElementById('ModalForm');
 
