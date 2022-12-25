@@ -1,11 +1,9 @@
 angular.module('market-front').controller('accountController',
     function ($scope, $http, $localStorage, $rootScope) {
 
-      const contextPath = 'https://freshcafe-production.up.railway.app/freshcafe';
-
       $scope.loadAccountInfo = function () {
         $http({
-          url: contextPath + '/api/v1/accounts/current',
+          url: $rootScope.contextPath + '/api/v1/accounts/current',
           method: 'GET'
         }).then(function (response) {
           $rootScope.currentUserInfo = response.data;
@@ -28,7 +26,7 @@ angular.module('market-front').controller('accountController',
 
       $scope.showMyOrders = function (pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/orders',
+          url: $rootScope.contextPath + '/api/v1/orders',
           method: 'GET',
           params: {
             page: pageIndex

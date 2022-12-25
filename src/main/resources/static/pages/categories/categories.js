@@ -1,12 +1,12 @@
 angular.module('market-front').controller("categoriesController",
     function ($scope, $http, $localStorage, $routeParams, $rootScope, $location) {
-      const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
+
 
       // $scope.categoryTitle = $routeParams.categoryTitle;
 
       $scope.loadPage = function (pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/categories',
+          url: $rootScope.contextPath + '/api/v1/categories',
           method: 'GET',
           params: {
             page: pageIndex
@@ -19,7 +19,7 @@ angular.module('market-front').controller("categoriesController",
 
       $scope.showCategoryPage = function (pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/categories',
+          url: $rootScope.contextPath + '/api/v1/categories',
           method: 'GET',
           params: {
             page: pageIndex
@@ -44,7 +44,7 @@ angular.module('market-front').controller("categoriesController",
 
       $scope.showPageByCategory = function (categoryTitle = '', pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/categories/' + categoryTitle,
+          url: $rootScope.contextPath + '/api/v1/categories/' + categoryTitle,
           method: 'GET',
           params: {
             page: pageIndex
@@ -72,7 +72,7 @@ angular.module('market-front').controller("categoriesController",
 
       $scope.addToCart = function (productId) {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/add/' + productId,
           method: 'GET'
         }).then(function successCallback(response) {
@@ -83,7 +83,7 @@ angular.module('market-front').controller("categoriesController",
 
       $scope.loadCart = function () {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
           method: 'GET'
         }).then(function (response) {
           $rootScope.cart = response.data;

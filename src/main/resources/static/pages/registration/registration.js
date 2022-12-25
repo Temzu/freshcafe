@@ -1,9 +1,9 @@
 angular.module('market-front').controller("registrationController",
-    function ($scope, $http, $localStorage, $location) {
-      const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
+    function ($scope, $http, $localStorage, $location, $rootScope) {
+
 
       $scope.tryToSignUp = function () {
-        $http.post(contextPath + '/api/v1/auth/signup', $scope.user)
+        $http.post($rootScope.contextPath + '/api/v1/auth/signup', $scope.user)
         .then(function successCallback(response) {
 
           if (response.data.token) {

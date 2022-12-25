@@ -1,10 +1,10 @@
 angular.module('market-front').controller("productsController",
-    function ($scope, $http, $localStorage) {
-      const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
+    function ($scope, $http, $localStorage, $rootScope) {
+
 
       $scope.loadPage = function (pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/products',
+          url: $rootScope.contextPath + '/api/v1/products',
           method: 'GET',
           params: {
             page: pageIndex,
@@ -20,7 +20,7 @@ angular.module('market-front').controller("productsController",
 
       $scope.showProductsPage = function (pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/products',
+          url: $rootScope.contextPath + '/api/v1/products',
           method: 'GET',
           params: {
             title: $scope.filter ? $scope.filter.title : null,
@@ -56,7 +56,7 @@ angular.module('market-front').controller("productsController",
 
       $scope.addToCart = function (productId) {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/add/' + productId,
           method: 'GET'
         }).then(function (response) {

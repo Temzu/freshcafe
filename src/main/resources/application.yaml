@@ -29,7 +29,7 @@ spring:
         web-allow-others: false
   redis:
     host: ${REDISHOST}
-    port: ${REDISPORT}
+    port: 1111
     password: ${REDISPASSWORD}
     username: ${REDISUSER}
     url: ${REDIS_URL}

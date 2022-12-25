@@ -1,12 +1,10 @@
 angular.module('market-front').controller('adminController',
     function ($scope, $http, $localStorage, $rootScope) {
 
-      const contextPath = 'https://freshcafe-production.up.railway.app/freshcafe';
-
 
       $scope.loadCategories = function (pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/categories',
+          url: $rootScope.contextPath + '/api/v1/categories',
           method: 'GET',
           params: {
             page: pageIndex
@@ -19,7 +17,7 @@ angular.module('market-front').controller('adminController',
 
       $scope.loadProduct = function (pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/categories',
+          url: $rootScope.contextPath + '/api/v1/categories',
           method: 'GET',
           params: {
             page: pageIndex
@@ -32,7 +30,7 @@ angular.module('market-front').controller('adminController',
 
       $scope.showCategoryPage = function (pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/categories',
+          url: $rootScope.contextPath + '/api/v1/categories',
           method: 'GET',
           params: {
             page: pageIndex
@@ -45,7 +43,7 @@ angular.module('market-front').controller('adminController',
 
       $scope.showPageByCategory = function (categoryTitle = '', pageIndex = 1) {
         $http({
-          url: contextPath + '/api/v1/categories/' + categoryTitle,
+          url: $rootScope.contextPath + '/api/v1/categories/' + categoryTitle,
           method: 'GET',
           params: {
             page: pageIndex
@@ -64,7 +62,7 @@ angular.module('market-front').controller('adminController',
           'title': newTitle
         }
 
-        $http.put(contextPath + '/api/v1/categories/update', updateTitle)
+        $http.put($rootScope.contextPath + '/api/v1/categories/update', updateTitle)
         .then(function successCallback(response) {
             $scope.loadCategories();
             $("#ModalCategoryChangeForm" + categoryId).modal("hide");
@@ -77,7 +75,7 @@ angular.module('market-front').controller('adminController',
         let imageUrl = $('#imageInput' + categoryId).val();
 
         $http({
-          url: contextPath + '/api/v1/categories/' + categoryId + '/upload',
+          url: $rootScope.contextPath + '/api/v1/categories/' + categoryId + '/upload',
           method: 'PUT',
           params: {
             imageUrl: imageUrl
@@ -92,7 +90,7 @@ angular.module('market-front').controller('adminController',
       $scope.uploadFileToUrl = function(categoryId, url){
 
         $http({
-          url: contextPath + url,
+          url: $rootScope.contextPath + url,
           method: 'PUT',
           params: {
             imageUrl: pageIndex
@@ -122,7 +120,7 @@ angular.module('market-front').controller('adminController',
         console.log($scope.newProduct);
         $scope.newProduct.categoryTitle = categoryTitle;
 
-        $http.post(contextPath + '/api/v1/products/create', $scope.newProduct)
+        $http.post($rootScope.contextPath + '/api/v1/products/create', $scope.newProduct)
         .then(function successCallback(response) {
           $scope.showPageByCategory(categoryTitle);
           $("#ModalProductCreateForm").modal("hide");
@@ -144,12 +142,12 @@ angular.module('market-front').controller('adminController',
           'description': newDescription
         };
 
-        $http.put(contextPath + '/api/v1/products/' + productId + '/update', updateProduct)
+        $http.put($rootScope.contextPath + '/api/v1/products/' + productId + '/update', updateProduct)
         .then(function successCallback(response) {
           $scope.showPageByCategory(categoryTitle);
           $("#ModalProductChangeForm" + productId).modal("hide");
 
-          $http.get(contextPath + '/api/v1/products/list')
+          $http.get($rootScope.contextPath + '/api/v1/products/list')
           .then(function successCallback(response) {
             $rootScope.allProducts = response.data;
           });
@@ -168,7 +166,7 @@ angular.module('market-front').controller('adminController',
         let imageUrl = $('#imageProductInput' + productId).val();
 
         $http({
-          url: contextPath + '/api/v1/products/' + productId + '/upload',
+          url: $rootScope.contextPath + '/api/v1/products/' + productId + '/upload',
           method: 'PUT',
           params: {
             imageUrl: imageUrl
@@ -177,7 +175,7 @@ angular.module('market-front').controller('adminController',
           $scope.showPageByCategory($rootScope.categoryTitle);
           $("#ModalProductChangeImageForm" + productId).modal("hide");
 
-          $http.get(contextPath + '/api/v1/products/list')
+          $http.get($rootScope.contextPath + '/api/v1/products/list')
           .then(function successCallback(response) {
             $rootScope.allProducts = response.data;
           });
@@ -189,7 +187,7 @@ angular.module('market-front').controller('adminController',
 
       $scope.deleteCategory = function (categoryId) {
         $http({
-          url: contextPath + '/api/v1/categories/delete/' + categoryId,
+          url: $rootScope.contextPath + '/api/v1/categories/delete/' + categoryId,
           method: 'DELETE'
         }).then(function successCallback(response) {
           $scope.loadCategories();
@@ -200,7 +198,7 @@ angular.module('market-front').controller('adminController',
       }
 
       $scope.createCategory = function () {
-        $http.post(contextPath + '/api/v1/categories/create', $scope.category)
+        $http.post($rootScope.contextPath + '/api/v1/categories/create', $scope.category)
         .then(function successCallback(response) {
           $scope.loadCategories();
           $("#ModalCategoryCreateForm").modal("hide");
@@ -211,7 +209,7 @@ angular.module('market-front').controller('adminController',
 
       $scope.deleteProduct = function (productId, categoryTitle = '') {
         $http({
-          url: contextPath + '/api/v1/products/delete/' + productId,
+          url: $rootScope.contextPath + '/api/v1/products/delete/' + productId,
           method: 'DELETE'
         }).then(function successCallback(response) {
           $scope.showPageByCategory(categoryTitle);
@@ -221,7 +219,7 @@ angular.module('market-front').controller('adminController',
 
       $scope.addToCart = function (productId) {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/add/' + productId,
           method: 'GET'
         }).then(function successCallback(response) {

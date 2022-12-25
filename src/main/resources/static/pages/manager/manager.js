@@ -1,12 +1,11 @@
-angular.module('market-front').controller('managerController', function ($scope, $http) {
+angular.module('market-front').controller('managerController', function ($scope, $http, $rootScope) {
 
-  const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
 
   $scope.activeCustomer='Обрабатывается';
 
   $scope.showAllOrders = function () {
     $http({
-      url: contextPath + '/api/v1/orders/find_all',
+      url: $rootScope.contextPath + '/api/v1/orders/find_all',
       method: 'GET'
     }).then(function (response) {
       $scope.allOrders = response.data;
@@ -23,12 +22,25 @@ angular.module('market-front').controller('managerController', function ($scope,
   }
 
   $scope.changeStatus = function (orderId) {
-    $http.post(contextPath + '/api/v1/orders/' + orderId + '/change_status')
+    $http.post($rootScope.contextPath + '/api/v1/orders/' + orderId + '/change_status')
     .then(function successCallback(response) {
       $scope.showAllOrders();
     }, function errorCallback(response) {
       alert(response.data.messages);
     });
+  }
+
+  $scope.showDate = function () {
+    let date = $('#datepicker').datepicker('getDate');
+
+    $http.post($rootScope.contextPath + '/api/v1/reports/order_report_date', date);
+
+    // let findDate = {
+    //   'day': date.getDay(),
+    //   'month': date.getMonth(),
+    //   'year': date.getFullYear()
+    // };
+    // console.log(findDate);
   }
 
   $scope.showAllOrders();

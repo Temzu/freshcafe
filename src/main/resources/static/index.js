@@ -57,7 +57,7 @@
       redirectTo: '/'
     });
   }
-  const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
+  const contextPath = "http://localhost:8189/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
 
@@ -91,13 +91,13 @@
 angular.module('market-front').controller('indexController',
     function ($rootScope, $scope, $http, $localStorage, $location) {
 
-      const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
+      $rootScope.contextPath = "http://localhost:8189/freshcafe";
 
       let myModal = document.getElementById('ModalForm');
 
       $scope.tryToAuth = function () {
 
-        $http.post(contextPath + '/api/v1/auth/login', $scope.user)
+        $http.post($rootScope.contextPath + '/api/v1/auth/login', $scope.user)
         .then(function successCallback(response) {
           if (response.data.token) {
             $http.defaults.headers.common.Authorization = response.data.token;
@@ -115,12 +115,12 @@ angular.module('market-front').controller('indexController',
             $location.path('/categories');
 
             $http.get(
-                contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid + '/merge')
+                $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid + '/merge')
             .then(function successCallback(response) {
             });
 
             $http({
-              url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
+              url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
               method: 'GET'
             }).then(function (response) {
               $rootScope.cart = response.data;
@@ -156,7 +156,7 @@ angular.module('market-front').controller('indexController',
 
       $scope.clearUser = function () {
 
-        $http.post(contextPath + '/api/v1/auth/logout')
+        $http.post($rootScope.contextPath + '/api/v1/auth/logout')
         .then(function successCallback(response) {
           //--//
         },function errorCallback(response) {

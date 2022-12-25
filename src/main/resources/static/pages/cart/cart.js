@@ -1,10 +1,9 @@
 angular.module('market-front').controller('cartController',
     function ($scope, $http, $localStorage, $rootScope) {
-      const contextPath = 'https://freshcafe-production.up.railway.app/freshcafe';
 
       $scope.loadCart = function () {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid,
           method: 'GET'
         }).then(function (response) {
           $rootScope.cart = response.data;
@@ -13,7 +12,7 @@ angular.module('market-front').controller('cartController',
 
       $scope.addToCart = function (productId) {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/add/' + productId,
           method: 'GET'
         }).then(function (response) {
@@ -25,7 +24,7 @@ angular.module('market-front').controller('cartController',
 
       $scope.incrementCartPosition = function (productId) {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/add/' + productId,
           method: 'GET'
         }).then(function (response) {
@@ -35,7 +34,7 @@ angular.module('market-front').controller('cartController',
 
       $scope.decrementCartPosition = function (productId) {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/decrement/' + productId,
           method: 'GET'
         }).then(function (response) {
@@ -45,7 +44,7 @@ angular.module('market-front').controller('cartController',
 
       $scope.clearCart = function () {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/clear',
           method: 'GET'
         }).then(function (response) {
@@ -55,7 +54,7 @@ angular.module('market-front').controller('cartController',
 
       $scope.removeItemFromCart = function (productId) {
         $http({
-          url: contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
+          url: $rootScope.contextPath + '/api/v1/cart/' + $localStorage.guestCartUuid
               + '/remove/' + productId,
           method: 'GET'
         }).then(function (response) {
@@ -64,7 +63,7 @@ angular.module('market-front').controller('cartController',
       }
 
       $scope.createOrder = function () {
-        $http.post(contextPath + '/api/v1/orders', $scope.order_info)
+        $http.post($rootScope.contextPath + '/api/v1/orders', $scope.order_info)
         .then(function (response) {
           alert('Заказ создан');
           $scope.loadCart();
@@ -79,7 +78,7 @@ angular.module('market-front').controller('cartController',
         }
       }
 
-      $http.get(contextPath + '/api/v1/products/list')
+      $http.get($rootScope.contextPath + '/api/v1/products/list')
       .then(function successCallback(response) {
         $rootScope.allProducts = response.data;
         console.log($rootScope.allProducts);

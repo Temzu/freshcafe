@@ -1,9 +1,9 @@
-angular.module('market-front').controller('ordersController', function ($scope, $http) {
-  const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
+angular.module('market-front').controller('ordersController', function ($scope, $http, $rootScope) {
+
 
   $scope.showMyOrders = function (pageIndex = 1) {
     $http({
-      url: contextPath + '/api/v1/orders',
+      url: $rootScope.contextPath + '/api/v1/orders',
       method: 'GET',
       params: {
         page: pageIndex
