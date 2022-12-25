@@ -1,6 +1,9 @@
 package com.temzu.freshcafe.exceptions;
 
 import com.temzu.freshcafe.enums.ExceptionTypes;
+import com.temzu.freshcafe.reports.OrderReportByDate;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ResourceNotFoundException extends ResourceException {
 
@@ -34,7 +37,11 @@ public class ResourceNotFoundException extends ResourceException {
     return new ResourceNotFoundException(entityClass, ExceptionTypes.UUID, uuid);
   }
 
-  public static ResourceNotFoundException byEmail(String uuid, Class<?> entityClass) {
-    return new ResourceNotFoundException(entityClass, ExceptionTypes.EMAIL, uuid);
+  public static ResourceNotFoundException byEmail(String email, Class<?> entityClass) {
+    return new ResourceNotFoundException(entityClass, ExceptionTypes.EMAIL, email);
+  }
+
+  public static ResourceNotFoundException byDate(LocalDate localDate, Class<?> entityClass) {
+    return new ResourceNotFoundException(entityClass, ExceptionTypes.DATE, localDate.toString());
   }
 }

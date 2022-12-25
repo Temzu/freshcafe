@@ -30,18 +30,5 @@ angular.module('market-front').controller('managerController', function ($scope,
     });
   }
 
-  $scope.showDate = function () {
-    let date = $('#datepicker').datepicker('getDate');
-
-    $http.post($rootScope.contextPath + '/api/v1/reports/order_report_date', date);
-
-    // let findDate = {
-    //   'day': date.getDay(),
-    //   'month': date.getMonth(),
-    //   'year': date.getFullYear()
-    // };
-    // console.log(findDate);
-  }
-
   $scope.showAllOrders();
 });

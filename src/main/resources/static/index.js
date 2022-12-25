@@ -45,6 +45,10 @@
       templateUrl: 'pages/manager/manager.html',
       controller: 'managerController'
     })
+    .when('/manager/order_report', {
+      templateUrl: 'pages/manager/report/order_report.html',
+      controller: 'orderReportController'
+    })
     .when('/admin', {
       templateUrl: 'pages/admin_panel/admin-control-panel.html',
       controller: 'adminController'
