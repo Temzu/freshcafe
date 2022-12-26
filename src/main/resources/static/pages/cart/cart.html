@@ -10,15 +10,15 @@
     <div class="cart-table">
       <div class="row cart-product" ng-repeat="oi in cart.items">
 
-        <div class="col-2 cart-product-img" ng-repeat="p in allProducts | filter:{id : oi.productId} : true">
+        <div class="col-lg-2 cart-product-img" ng-repeat="p in allProducts | filter:{id : oi.productId} : true">
           <img src="{{p.imageName}}" alt="">
         </div>
 
-        <div class="col-5">
+        <div class="col-lg-3 col-3">
           <h5>{{oi.productTitle}}</h5>
         </div>
 
-        <div class="col-1">
+        <div class="col-lg-2 col-2">
           <div class="row">
             <div class="col p-0 text-center">
               <a type="button" ng-click="decrementCartPosition(oi.productId)">
@@ -37,11 +37,11 @@
           </div>
         </div>
 
-        <div class="col-2 text-center">
+        <div class="col-lg-2 col-2 text-center">
           <h4>{{oi.price}}₽</h4>
         </div>
 
-        <div class="col-2 text-center">
+        <div class="col-lg-2 col-2 text-center">
           <button class="btn btn-danger" ng-click="removeItemFromCart(oi.productId)">Удалить
           </button>
         </div>
