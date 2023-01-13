@@ -64,7 +64,7 @@
   const contextPath = "https://freshcafe-production.up.railway.app/freshcafe";
 
   function run($rootScope, $http, $localStorage) {
-
+//
     $("#reg").click(function(){
       $("#ModalForm").modal("hide");
     });
