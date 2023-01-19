@@ -44,7 +44,8 @@ public class AuthServiceImpl implements AuthService {
     tokenService.expireToken(token);
   }
 
-  private String returnToken(User user) {
+  @Override
+  public String returnToken(User user) {
     UserInfo userInfo =
         UserInfo.builder()
             .userId(user.getId())

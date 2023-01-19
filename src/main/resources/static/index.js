@@ -78,6 +78,8 @@
       .then(function successCallback(response) {
         $localStorage.guestCartUuid = response.data.value;
         console.log($localStorage.guestCartUuid);
+      }, function errorCallback(response) {
+        alert(response.data.messages);
       });
     } else {
       $http({
@@ -85,9 +87,14 @@
         method: 'GET'
       }).then(function (response) {
         $rootScope.cart = response.data;
+      }, function errorCallback(response) {
+        console.log("err")
+        $http.defaults.headers.common.Authorization = null;
+
+        delete $localStorage.currentUser;
+
       });
     }
-
 
   }
 })();
@@ -150,14 +157,6 @@ angular.module('market-front').controller('indexController',
 
       };
 
-      $scope.toRegistration = function () {
-        $location.path('/registration');
-      };
-
-      $scope.toAccount = function () {
-        $location.path('/account');
-      };
-
       $scope.clearUser = function () {
 
         $http.post($rootScope.contextPath + '/api/v1/auth/logout')
@@ -170,6 +169,16 @@ angular.module('market-front').controller('indexController',
         delete $localStorage.currentUser;
         $http.defaults.headers.common.Authorization = '';
       };
+
+      $scope.toRegistration = function () {
+        $location.path('/registration');
+      };
+
+      $scope.toAccount = function () {
+        $location.path('/account');
+      };
+
+
 
       $rootScope.isUserLoggedIn = function () {
         if ($localStorage.currentUser) {

@@ -51,8 +51,8 @@ public class TokenServiceImpl implements TokenService {
             .compact();
 
     redisService.setWithExpirationTime(
-        token,
         user.getUserLogin().concat("_token"),
+        token,
         Duration.between(start, expirationTime)
     );
     return token;

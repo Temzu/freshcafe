@@ -46,6 +46,18 @@ angular.module('market-front').controller('accountController',
         return arr;
       }
 
+      $scope.changePass = function () {
+        $http.post($rootScope.contextPath + '/api/v1/accounts/change_pass', $scope.newPass)
+        .then(function successCallback(response) {
+          $http.defaults.headers.common.Authorization = response.data.token;
+          $localStorage.currentUser.token = response.data.token;
+          $("#ModalPasswordChangeForm").modal("hide");
+        }, function errorCallback(response) {
+          alert(response.data.messages);
+        });
+      }
+
+
       $scope.showMyOrders();
 
       $scope.loadAccountInfo();

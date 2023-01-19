@@ -42,10 +42,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       filterChain.doFilter(httpServletRequest, httpServletResponse);
       return;
     }
-//    System.out.println(httpServletRequest.getParts().isEmpty());
 
     token = token.substring(7);
-    if (!redisService.exists(token)) {
+
+    UserInfo userInfo = tokenService.parseToken(token);
+    String key = userInfo.getUserLogin().concat("_token");
+    if (!redisService.exists(key) || !redisService.get(key).equals(token)) {
       httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
       ObjectMapper mapper = new ObjectMapper();
       httpServletResponse.setContentType("application/json");

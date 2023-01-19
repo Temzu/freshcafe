@@ -66,4 +66,11 @@ public class UserDaoImpl implements UserDao {
   public User update(User user) {
     return userRepository.save(user);
   }
+
+  @Override
+  public void updatePass(String newPass, String currentUser) {
+    User byLogin = findByLogin(currentUser);
+    byLogin.setPassword(passwordEncoder.encode(newPass));
+    userRepository.save(byLogin);
+  }
 }
