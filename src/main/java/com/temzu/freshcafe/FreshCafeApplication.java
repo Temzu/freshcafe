@@ -13,6 +13,7 @@ public class FreshCafeApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(FreshCafeApplication.class, args);
+    System.out.println();
   }
 
 }
